@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6wbbmre8kjp1"]
+[gd_scene load_steps=10 format=3 uid="uid://b6wbbmre8kjp1"]
 
 [ext_resource type="Script" path="res://scenes/teamaking_scene.gd" id="1_7obi3"]
 [ext_resource type="Texture2D" uid="uid://k8ogg2sqqx61" path="res://images/backgrounds/teamaking-background.png" id="1_887p3"]
 [ext_resource type="Texture2D" uid="uid://b7jbemlx8cl4" path="res://images/cards/bergamot.png" id="4_ndl8t"]
+[ext_resource type="FontFile" uid="uid://dvv3p4nw3crsk" path="res://fonts/Laila-Bold.ttf" id="5_j3yw8"]
 [ext_resource type="PackedScene" uid="uid://br8gqbgh5hdkd" path="res://prop_menu.tscn" id="5_jbjps"]
+[ext_resource type="StyleBox" uid="uid://c7qlbu0aec57n" path="res://scenes/menu_button_default.stylebox" id="6_ketyg"]
+[ext_resource type="StyleBox" uid="uid://dw66y5nm6hqmn" path="res://scenes/menu_button_hover.stylebox" id="7_mpw7p"]
+[ext_resource type="StyleBox" uid="uid://3whymixjrddr" path="res://scenes/menu_button_pressed.stylebox" id="8_253nu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4cqo"]
 
@@ -48,3 +52,16 @@ offset_left = 1031.0
 offset_top = 884.0
 offset_right = 1171.0
 offset_bottom = 1024.0
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1416.0
+offset_top = 918.0
+offset_right = 1771.0
+offset_bottom = 981.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("5_j3yw8")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("6_ketyg")
+theme_override_styles/hover = ExtResource("7_mpw7p")
+theme_override_styles/pressed = ExtResource("8_253nu")
+text = "Select Ingredients"

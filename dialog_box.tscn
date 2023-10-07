@@ -27,10 +27,8 @@ script = ExtResource("1_rgduo")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 146.0
-offset_top = 116.0
-offset_right = 756.0
-offset_bottom = 403.0
+offset_right = 610.0
+offset_bottom = 287.0
 
 [node name="Panel2" type="Panel" parent="MarginContainer"]
 layout_mode = 2
