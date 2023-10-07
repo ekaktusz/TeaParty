@@ -40,6 +40,12 @@ func _ready():
 	
 	pass # Replace with function body.
 
+func return_prop(propData: PropData):
+	var allProps = $GridContainer.get_children()
+	for prop in allProps:
+		if prop.propData == propData:
+			prop.enable()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

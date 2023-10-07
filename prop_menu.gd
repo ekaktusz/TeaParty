@@ -56,6 +56,7 @@ func _input(event):
 					self.disable()
 					parentScene.select_prop(self.propData)
 			else:
+				get_parent().return_prop(self.propData)
 				self.disable()
 	pass # Replace with function body.
 
