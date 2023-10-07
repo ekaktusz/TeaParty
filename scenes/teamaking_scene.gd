@@ -16,6 +16,11 @@ var props = [
 		"Black Tea",
 		"res://images/props/blacktea.png",
 		"res://images/cards/black_tea.png"
+	),
+	PropData.new(
+		"Chamomile",
+		"res://images/props/chamomile.png",
+		"res://images/cards/chamomile.png"
 	)
 ]
 

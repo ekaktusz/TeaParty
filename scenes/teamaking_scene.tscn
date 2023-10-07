@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://b7jbemlx8cl4" path="res://images/cards/bergamot.png" id="4_ndl8t"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4cqo"]
-load_path = "res://.godot/imported/honey.jpeg-e07544285b438ca5d383ad16d4386319.ctex"
 
 [node name="TeaMakingScene" type="Node2D"]
 script = ExtResource("1_7obi3")
