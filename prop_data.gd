@@ -2,13 +2,10 @@ class_name PropData extends Node2D
 
 var propName: String
 var propIconPath: String
-var propCardParh: String
+var propCardPath: String
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _init(inName, iconPath, cardPath):
+	self.propName = inName
+	self.propIconPath = iconPath
+	self.propCardPath = cardPath
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

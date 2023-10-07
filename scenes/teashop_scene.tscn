@@ -53,6 +53,7 @@ theme_override_styles/pressed = ExtResource("8_hmopi")
 text = "Make Tea"
 
 [node name="Button2" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1682.0
 offset_top = 803.0
 offset_right = 1859.0

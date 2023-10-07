@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://br8gqbgh5hdkd"]
+
+[ext_resource type="Script" path="res://prop_menu.gd" id="1_vu4vh"]
+[ext_resource type="Texture2D" uid="uid://b2hub4e35qh08" path="res://images/props/bergamot.png" id="2_gasha"]
+
+[node name="prop_menu" type="MarginContainer"]
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_vu4vh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = ExtResource("2_gasha")
+expand_mode = 2
