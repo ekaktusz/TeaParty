@@ -25,25 +25,29 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_rgduo")
 
-[node name="Panel2" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 45.0
-offset_top = 29.0
-offset_right = 862.0
-offset_bottom = 566.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 116.0
+offset_right = 756.0
+offset_bottom = 403.0
+
+[node name="Panel2" type="Panel" parent="MarginContainer"]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_scqu2")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 50.0
-offset_top = 34.0
-offset_right = 856.0
-offset_bottom = 560.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_va0sh")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,7 +59,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/Panel/MarginContainer"]
 layout_mode = 2
 theme_override_colors/default_color = Color(0.270588, 0.203922, 0.0980392, 1)
 theme_override_fonts/normal_font = ExtResource("1_kdugg")

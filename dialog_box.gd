@@ -28,7 +28,7 @@ var customers = [
 func _ready():
 	var tween = get_tree().create_tween()
 	
-	tween.tween_property($Panel/MarginContainer/RichTextLabel, "visible_ratio", 1, 3)
+	tween.tween_property($MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel, "visible_ratio", 1, 3)
 	
 	pass # Replace with function body.
 

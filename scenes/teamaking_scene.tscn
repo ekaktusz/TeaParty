@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6wbbmre8kjp1"]
+[gd_scene load_steps=6 format=3 uid="uid://b6wbbmre8kjp1"]
 
 [ext_resource type="Script" path="res://scenes/teamaking_scene.gd" id="1_7obi3"]
 [ext_resource type="Texture2D" uid="uid://k8ogg2sqqx61" path="res://images/backgrounds/teamaking-background.png" id="1_887p3"]
 [ext_resource type="Texture2D" uid="uid://b7jbemlx8cl4" path="res://images/cards/bergamot.png" id="4_ndl8t"]
+[ext_resource type="PackedScene" uid="uid://br8gqbgh5hdkd" path="res://prop_menu.tscn" id="5_jbjps"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4cqo"]
 
@@ -29,3 +30,21 @@ offset_top = 54.0
 offset_right = 1354.0
 offset_bottom = 755.0
 columns = 6
+
+[node name="SelectedProp1" parent="." instance=ExtResource("5_jbjps")]
+offset_left = 622.0
+offset_top = 888.0
+offset_right = 762.0
+offset_bottom = 1028.0
+
+[node name="SelectedProp2" parent="." instance=ExtResource("5_jbjps")]
+offset_left = 828.0
+offset_top = 883.0
+offset_right = 968.0
+offset_bottom = 1023.0
+
+[node name="SelectedProp3" parent="." instance=ExtResource("5_jbjps")]
+offset_left = 1031.0
+offset_top = 884.0
+offset_right = 1171.0
+offset_bottom = 1024.0

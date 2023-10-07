@@ -6,7 +6,8 @@ var hoverOpacityChangeSpeed: float = 0.03
 
 var propData: PropData
 
-var selected = false
+var disabled = false
+var notRealShit = false # meaning that its not in the inventory but it's a dummy object in the bottom showing one of the selected items
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,14 +22,17 @@ func load(propdata: PropData):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if selected:
+	if disabled:
 		return
 	
 	if mouseOnCard:
 		var parentScene = get_parent().get_parent()
+		if self.notRealShit:
+			parentScene = get_parent()
 		var currentSelectedProp = parentScene.get_node("CurrentSelectedProp")
 		currentSelectedProp.texture = load(self.propData.propCardPath)
 		print(currentSelectedProp.name)
+			
 		if $TextureRect2.modulate.a > 0:
 			$TextureRect2.modulate.a -= hoverOpacityChangeSpeed
 	else:
@@ -43,10 +47,25 @@ func _input(event):
 			mouseOnCard = true
 		else:
 			mouseOnCard = false
-			
+	
 	if event is InputEventMouseButton:
 		if get_global_rect().has_point(event.position) and event.pressed:
-			selected = true
-			$TextureRect2.modulate.a = 0
-			$TextureRect.modulate.a = 0
+			if not self.notRealShit:
+				var parentScene = get_parent().get_parent()
+				if parentScene.can_select():
+					self.disable()
+					parentScene.select_prop(self.propData)
+			else:
+				self.disable()
 	pass # Replace with function body.
+
+func disable():
+	disabled = true
+	$TextureRect2.modulate.a = 0
+	$TextureRect.modulate.a = 0
+	
+func enable():
+	disabled = false
+	$TextureRect2.modulate.a = DEFAULT_ALPHA
+	$TextureRect.modulate.a = 1
+

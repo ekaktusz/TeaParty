@@ -30,8 +30,33 @@ func _ready():
 		var prop = PropMenu.instantiate()
 		prop.load(item)
 		$GridContainer.add_child(prop)
+		
+	$SelectedProp1.disable()
+	$SelectedProp1.notRealShit = true
+	$SelectedProp2.disable()
+	$SelectedProp2.notRealShit = true
+	$SelectedProp3.disable()
+	$SelectedProp3.notRealShit = true
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+func can_select():
+	return $SelectedProp1.disabled or $SelectedProp2.disabled or $SelectedProp3.disabled
+
+func select_prop(propData: PropData):
+	if $SelectedProp1.disabled:
+		$SelectedProp1.load(propData)
+		$SelectedProp1.enable()
+		return
+	if $SelectedProp2.disabled:
+		$SelectedProp2.load(propData)
+		$SelectedProp2.enable()
+		return
+	if $SelectedProp3.disabled:
+		$SelectedProp3.load(propData)
+		$SelectedProp3.enable()
+		return
