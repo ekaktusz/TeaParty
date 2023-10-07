@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 BgMusic="*res://bg_music.tscn"
 SceneTransition="*res://scene_transition.tscn"
 CustomerDatabase="*res://customer_database.gd"
+SelectedIngredient="*res://selected_ingredients.gd"
 
 [display]
 

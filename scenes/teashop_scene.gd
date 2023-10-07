@@ -26,6 +26,18 @@ var customers = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$customer.load_from_data(customers[currentCustomer])
+	
+	if (SelectedIngredient.is_valid()):
+		$ing1.texture = load(SelectedIngredient.prop1.propIconPath)
+		$ing2.texture = load(SelectedIngredient.prop2.propIconPath)
+		$ing3.texture = load(SelectedIngredient.prop3.propIconPath)
+		$ing1.visible = true
+		$ing2.visible = true
+		$ing3.visible = true
+	else:
+		$ing1.visible = false
+		$ing2.visible = false
+		$ing3.visible = false
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

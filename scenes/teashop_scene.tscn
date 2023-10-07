@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://4a60ot8exgno"]
+[gd_scene load_steps=11 format=3 uid="uid://4a60ot8exgno"]
 
 [ext_resource type="Texture2D" uid="uid://cptw1l2k3a5t2" path="res://images/backgrounds/teashop-background.png" id="1_sr4s6"]
 [ext_resource type="Script" path="res://scenes/teashop_scene.gd" id="1_uiaff"]
@@ -8,17 +8,8 @@
 [ext_resource type="FontFile" uid="uid://dvv3p4nw3crsk" path="res://fonts/Laila-Bold.ttf" id="5_c58nw"]
 [ext_resource type="StyleBox" uid="uid://dw66y5nm6hqmn" path="res://scenes/menu_button_hover.stylebox" id="7_288ub"]
 [ext_resource type="StyleBox" uid="uid://3whymixjrddr" path="res://scenes/menu_button_pressed.stylebox" id="8_hmopi"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ltih8"]
-bg_color = Color(0.160784, 0.117647, 0.0509804, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
+[ext_resource type="StyleBox" uid="uid://b5iybcnhed637" path="res://scenes/menu_button_disabled.stylebox" id="9_h7dq8"]
+[ext_resource type="Texture2D" uid="uid://b2hub4e35qh08" path="res://images/props/bergamot.png" id="10_ypjny"]
 
 [node name="teashop_scene" type="Control"]
 layout_mode = 3
@@ -76,9 +67,39 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = ExtResource("5_1omu1")
 theme_override_styles/hover = ExtResource("7_288ub")
 theme_override_styles/pressed = ExtResource("8_hmopi")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_ltih8")
+theme_override_styles/disabled = ExtResource("9_h7dq8")
 disabled = true
 text = "Serve Tea"
+
+[node name="ing1" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 0
+offset_left = 715.0
+offset_top = 788.0
+offset_right = 845.0
+offset_bottom = 918.0
+texture = ExtResource("10_ypjny")
+expand_mode = 2
+
+[node name="ing2" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 0
+offset_left = 920.0
+offset_top = 789.0
+offset_right = 1050.0
+offset_bottom = 919.0
+texture = ExtResource("10_ypjny")
+expand_mode = 2
+
+[node name="ing3" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 0
+offset_left = 1141.0
+offset_top = 794.0
+offset_right = 1271.0
+offset_bottom = 924.0
+texture = ExtResource("10_ypjny")
+expand_mode = 2
 
 [connection signal="pressed" from="Button" to="DialogBox" method="_on_button_make_tea_pressed"]
 [connection signal="pressed" from="Button2" to="DialogBox" method="_on_button_make_tea_pressed"]

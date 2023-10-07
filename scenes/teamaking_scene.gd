@@ -48,6 +48,7 @@ func return_prop(propData: PropData):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$Button.disabled = can_select()
 	pass
 	
 func can_select():
@@ -66,3 +67,10 @@ func select_prop(propData: PropData):
 		$SelectedProp3.load(propData)
 		$SelectedProp3.enable()
 		return
+
+func _on_selec_button_pressed():
+	SceneTransition.change_scene_to_file("res://scenes/teashop_scene.tscn")
+	SelectedIngredient.prop1 = $SelectedProp1.propData
+	SelectedIngredient.prop2 = $SelectedProp2.propData
+	SelectedIngredient.prop3 = $SelectedProp3.propData
+	pass # Replace with function body.

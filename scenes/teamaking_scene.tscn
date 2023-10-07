@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6wbbmre8kjp1"]
+[gd_scene load_steps=16 format=3 uid="uid://b6wbbmre8kjp1"]
 
 [ext_resource type="Script" path="res://scenes/teamaking_scene.gd" id="1_7obi3"]
 [ext_resource type="Texture2D" uid="uid://k8ogg2sqqx61" path="res://images/backgrounds/teamaking-background.png" id="1_887p3"]
@@ -8,8 +8,26 @@
 [ext_resource type="StyleBox" uid="uid://c7qlbu0aec57n" path="res://scenes/menu_button_default.stylebox" id="6_ketyg"]
 [ext_resource type="StyleBox" uid="uid://dw66y5nm6hqmn" path="res://scenes/menu_button_hover.stylebox" id="7_mpw7p"]
 [ext_resource type="StyleBox" uid="uid://3whymixjrddr" path="res://scenes/menu_button_pressed.stylebox" id="8_253nu"]
+[ext_resource type="StyleBox" uid="uid://b5iybcnhed637" path="res://scenes/menu_button_disabled.stylebox" id="9_o5n4a"]
+[ext_resource type="FontFile" uid="uid://c2h07jn3xr6tq" path="res://fonts/Laila-Regular.ttf" id="10_0u0xr"]
+[ext_resource type="FontFile" uid="uid://ca0tcyh4ap0eh" path="res://fonts/Laila-Light.ttf" id="11_af7rs"]
+[ext_resource type="FontFile" uid="uid://i88p16kmb6bn" path="res://fonts/Laila-SemiBold.ttf" id="12_klwbg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4cqo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lybp"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ieddl"]
+bg_color = Color(0.92549, 0.796078, 0.619608, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="TeaMakingScene" type="Node2D"]
 script = ExtResource("1_7obi3")
@@ -59,9 +77,63 @@ offset_top = 918.0
 offset_right = 1771.0
 offset_bottom = 981.0
 focus_mode = 0
+theme_override_colors/font_disabled_color = Color(0.172549, 0.172549, 0.172549, 1)
 theme_override_fonts/font = ExtResource("5_j3yw8")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = ExtResource("6_ketyg")
 theme_override_styles/hover = ExtResource("7_mpw7p")
 theme_override_styles/pressed = ExtResource("8_253nu")
+theme_override_styles/disabled = ExtResource("9_o5n4a")
+disabled = true
 text = "Select Ingredients"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 94.0
+offset_top = 184.0
+offset_right = 440.0
+offset_bottom = 625.0
+scale = Vector2(0.995881, 1.02633)
+
+[node name="Panel2" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4lybp")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ieddl")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.270588, 0.203922, 0.0980392, 1)
+theme_override_fonts/normal_font = ExtResource("10_0u0xr")
+theme_override_fonts/bold_font = ExtResource("5_j3yw8")
+theme_override_fonts/italics_font = ExtResource("11_af7rs")
+theme_override_fonts/bold_italics_font = ExtResource("12_klwbg")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+bbcode_enabled = true
+text = "Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity..."
+
+[connection signal="pressed" from="Button" to="." method="_on_selec_button_pressed"]
