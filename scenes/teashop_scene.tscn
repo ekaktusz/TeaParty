@@ -52,6 +52,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = ExtResource("5_1omu1")
 theme_override_styles/hover = ExtResource("7_288ub")
 theme_override_styles/pressed = ExtResource("8_hmopi")
+theme_override_styles/disabled = ExtResource("9_h7dq8")
 text = "Select Ingredients"
 
 [node name="Button2" type="Button" parent="."]
@@ -101,5 +102,5 @@ offset_bottom = 924.0
 texture = ExtResource("10_ypjny")
 expand_mode = 2
 
-[connection signal="pressed" from="Button" to="DialogBox" method="_on_button_make_tea_pressed"]
-[connection signal="pressed" from="Button2" to="DialogBox" method="_on_button_make_tea_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_select_ing_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_serve_pressed"]

@@ -1,73 +1,94 @@
 extends Control
-var currentCustomer: int = 0
-var customers = [
-	CustomerData.new(
-		"Grumpy lumberman",
-		"Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity...",
-		[
-			"I feel tired, let's see if you could give me some caffeine. (black tea // mate tea)",
-			"So you think you know tea, lad? Same tea as last time, but make it spicy! (bergamot // cloves)",
-			"Gives me energy, has some spice, but the taste of home is what your tea is still missing. (milk // whisky)"
-		],
-		[
-			"Bloody hell, this isn't what I asked for, mate! ",
-			"Sorry... That's just not my cup of tea.",
-			"Bleee, this is far from the King's standard, innit?"
-		],
-		[
-			"Just what the doctor ordered!",
-			"Sugar, spice, and everything nice! (Except for the sugar, let's keep that for the Americans.)",
-			"Oh my Lord, you did it. It's bloody brilliant. I must assume you also have some history exploiting other sub-continents for centuries to have this level of knowledge of tea making in your blood."
-		],
-		"res://images/characthers/CozyJam2023_paintergirl.png"
-	),
-	CustomerData.new(
-		"Heartbroken Butcher",
-		"Greetings! You know me, you buy meat at my shop. Anyway... those were better days... My gal just left me! What am I supposed to do now?!",
-		[
-			"I feel tired, let's see if you could give me some caffeine. (black tea // mate tea)",
-			"So you think you know tea, lad? Same tea as last time, but make it spicy! (bergamot // cloves)",
-			"Gives me energy, has some spice, but the taste of home is what your tea is still missing. (milk // whisky)"
-		],
-		[
-			"Bloody hell, this isn't what I asked for, mate! ",
-			"Sorry... That's just not my cup of tea.",
-			"Bleee, this is far from the King's standard, innit?"
-		],
-		[
-			"Just what the doctor ordered!",
-			"Sugar, spice, and everything nice! (Except for the sugar, let's keep that for the Americans.)",
-			"Oh my Lord, you did it. It's bloody brilliant. I must assume you also have some history exploiting other sub-continents for centuries to have this level of knowledge of tea making in your blood."
-		],
-		"res://images/characthers/CozyJam2023_paintergirl.png"
-	)
-]
+
+func check_ingredients():
+	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
+	return CustomerDatabase.getCurrentCustomer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop1.propName) or CustomerDatabase.getCurrentCustomer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop2.propName) or CustomerDatabase.getCurrentCustomer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop3.propName)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$customer.load_from_data(customers[currentCustomer])
+	reset()
 	
-	if (SelectedIngredient.is_valid()):
+var over = false
+	
+func reset():
+	$customer.load_from_data(CustomerDatabase.getCurrentCustomer())
+	$Button2.disabled = true
+	$Button.disabled = true
+
+	if (SelectedIngredient.is_valid()): # when return to teashop
 		$ing1.texture = load(SelectedIngredient.prop1.propIconPath)
 		$ing2.texture = load(SelectedIngredient.prop2.propIconPath)
 		$ing3.texture = load(SelectedIngredient.prop3.propIconPath)
 		$ing1.visible = true
 		$ing2.visible = true
 		$ing3.visible = true
+		$Button2.disabled = false
+		$Button.disabled = false
+		$DialogBox.has_more = false
+		$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().get_current_order_dialog())
+		$DialogBox.tween_complete()
 	else:
 		$ing1.visible = false
 		$ing2.visible = false
 		$ing3.visible = false
+		$DialogBox.start_print_effect()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if $DialogBox.is_complete and self.over:
+		if check_ingredients():
+			end_with_win()
+		else:
+			end_with_lose()
+		SelectedIngredient.reset()
+		self.over = false
+		$customer.fade_out()
+		reset()
+	
+	if $DialogBox.is_complete and not $DialogBox.has_more:
+		$Button.disabled = false
+		
+func end_with_win():
+	CustomerDatabase.getCurrentCustomer().customerCurrentLevel += 1
+	CustomerDatabase.currentCustomer += 1
+	pass
+	
+func end_with_lose():
+	CustomerDatabase.currentCustomer += 1
 	pass
 
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			if $DialogBox.is_complete and not customers[currentCustomer].introFinished:
-				customers[currentCustomer].introFinished = true
+			if $DialogBox.is_complete and not CustomerDatabase.getCurrentCustomer().introFinished:
+				CustomerDatabase.getCurrentCustomer().introFinished = true
 				$DialogBox.has_more = false
-				$DialogBox.reset(customers[currentCustomer].customerOrderDialogs[0]) #ugyis csak az elsonel kell
+				$DialogBox.reset(CustomerDatabase.getCurrentCustomer().customerOrderDialogs[0]) #ugyis csak az elsonel kell
+
+func play_winning_dialog():
+	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
+	$DialogBox.reset(cust.customerOrderAcceptDialogs[cust.customerCurrentLevel])
+	$DialogBox.start_print_effect()
+	self.over = true
+	
+func play_losing_dialog():
+	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
+	$DialogBox.reset(cust.customerOrderRejectionDialogs[cust.customerCurrentLevel])
+	$DialogBox.start_print_effect()
+	self.over = true
+
+func _on_button_serve_pressed():
+	if check_ingredients():
+		play_winning_dialog()
+	else:
+		play_losing_dialog()
+	$Button2.disabled = true
+	$ing1.visible = false
+	$ing2.visible = false
+	$ing3.visible = false
+	pass # Replace with function body.
+
+func _on_button_select_ing_pressed():
+	SceneTransition.change_scene_to_file("res://scenes/teamaking_scene.tscn")
+	pass # Replace with function body.

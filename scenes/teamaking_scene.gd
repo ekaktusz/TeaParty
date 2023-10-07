@@ -21,6 +21,26 @@ var props = [
 		"Chamomile",
 		"res://images/props/chamomile.png",
 		"res://images/cards/chamomile.png"
+	),
+	PropData.new(
+		"Chili",
+		"res://images/props/chili.png",
+		"res://images/cards/chili.png"
+	),
+	PropData.new(
+		"Chocolate",
+		"res://images/props/chocolate.png",
+		"res://images/cards/chocolate.png"
+	),
+	PropData.new(
+		"Cinnamon",
+		"res://images/props/cinnamon.png",
+		"res://images/cards/cinnamon.png"
+	),
+	PropData.new(
+		"Cloves",
+		"res://images/props/cloves.png",
+		"res://images/cards/cloves.png"
 	)
 ]
 
@@ -37,6 +57,8 @@ func _ready():
 	$SelectedProp2.notRealShit = true
 	$SelectedProp3.disable()
 	$SelectedProp3.notRealShit = true
+	
+	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = CustomerDatabase.getCurrentCustomer().get_current_order_dialog()
 	
 	pass # Replace with function body.
 

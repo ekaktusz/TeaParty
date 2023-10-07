@@ -8,8 +8,9 @@ var customerOrderRejectionDialogs
 var customerOrderAcceptDialogs
 var customerImage: String
 var introFinished: bool
+var correctItems
 
-func _init(name, starter, orderDialogs, rejectionDialogs, acceptDialogs, imagePath):
+func _init(name, starter, orderDialogs, rejectionDialogs, acceptDialogs, imagePath, items):
 	self.customerName = name
 	self.customerStarterMessage = starter
 	self.customerCurrentLevel = 0
@@ -18,13 +19,16 @@ func _init(name, starter, orderDialogs, rejectionDialogs, acceptDialogs, imagePa
 	self.customerOrderRejectionDialogs = rejectionDialogs
 	self.customerOrderAcceptDialogs = acceptDialogs
 	self.customerImage = imagePath
+	self.correctItems = items
 	pass
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func get_current_order_dialog():
+	return customerOrderDialogs[customerCurrentLevel]
 
+func get_current_accept_dialog():
+	return customerOrderAcceptDialogs[customerCurrentLevel]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func get_current_reject_dialog():
+	return customerOrderRejectionDialogs[customerCurrentLevel]
+	
+

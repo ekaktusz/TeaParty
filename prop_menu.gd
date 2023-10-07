@@ -41,6 +41,9 @@ func _process(delta):
 	pass
 	
 func _input(event):
+	if disabled:
+		return
+	
 	if event is InputEventMouse:
 		if $TextureRect.get_global_rect().has_point(event.position):
 			print("asd3")
