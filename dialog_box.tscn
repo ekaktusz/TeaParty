@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://deb0m42tg44mn"]
+[gd_scene load_steps=12 format=3 uid="uid://deb0m42tg44mn"]
 
 [ext_resource type="FontFile" uid="uid://c2h07jn3xr6tq" path="res://fonts/Laila-Regular.ttf" id="1_kdugg"]
 [ext_resource type="Script" path="res://dialog_box.gd" id="1_rgduo"]
@@ -19,6 +19,50 @@ corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nf78"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Animation" id="Animation_2ls8t"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(568, 252), Vector2(568, 239)]
+}
+
+[sub_resource type="Animation" id="Animation_dygmd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(568, 252)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aq2ky"]
+_data = {
+"RESET": SubResource("Animation_dygmd"),
+"new_animation": SubResource("Animation_2ls8t")
+}
 
 [node name="DialogBox" type="Control"]
 layout_mode = 3
@@ -73,3 +117,21 @@ bbcode_enabled = true
 text = "Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity..."
 visible_characters = 0
 visible_ratio = 0.0
+
+[node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 568.0
+offset_top = 252.0
+offset_right = 584.0
+offset_bottom = 268.0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_3nf78")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nf78")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3nf78")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Button"]
+autoplay = "new_animation"
+libraries = {
+"": SubResource("AnimationLibrary_aq2ky")
+}

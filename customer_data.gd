@@ -7,11 +7,13 @@ var customerOrderDialogs
 var customerOrderRejectionDialogs
 var customerOrderAcceptDialogs
 var customerImage: String
+var introFinished: bool
 
 func _init(name, starter, orderDialogs, rejectionDialogs, acceptDialogs, imagePath):
 	self.customerName = name
 	self.customerStarterMessage = starter
 	self.customerCurrentLevel = 0
+	self.introFinished = false
 	self.customerOrderDialogs = orderDialogs
 	self.customerOrderRejectionDialogs = rejectionDialogs
 	self.customerOrderAcceptDialogs = acceptDialogs
