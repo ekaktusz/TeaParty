@@ -6,6 +6,8 @@ var hoverOpacityChangeSpeed: float = 0.03
 
 var propData: PropData
 
+var selected = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$TextureRect2.modulate.a = DEFAULT_ALPHA
@@ -19,6 +21,9 @@ func load(propdata: PropData):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if selected:
+		return
+	
 	if mouseOnCard:
 		var parentScene = get_parent().get_parent()
 		var currentSelectedProp = parentScene.get_node("CurrentSelectedProp")
@@ -38,4 +43,10 @@ func _input(event):
 			mouseOnCard = true
 		else:
 			mouseOnCard = false
+			
+	if event is InputEventMouseButton:
+		if get_global_rect().has_point(event.position) and event.pressed:
+			selected = true
+			$TextureRect2.modulate.a = 0
+			$TextureRect.modulate.a = 0
 	pass # Replace with function body.
