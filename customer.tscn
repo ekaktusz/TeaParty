@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://3m2b8j1rqf01"]
+
+[ext_resource type="Texture2D" uid="uid://duy1ptgy77xqb" path="res://images/characthers/CozyJam2023_Butcher_happy.png" id="1_53fq3"]
+[ext_resource type="Script" path="res://customer.gd" id="1_twywt"]
+
+[node name="customer" type="Node2D"]
+script = ExtResource("1_twywt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4, 3)
+scale = Vector2(0.502, 0.489904)
+texture = ExtResource("1_53fq3")
+centered = false

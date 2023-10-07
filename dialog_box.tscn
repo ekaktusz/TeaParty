@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://deb0m42tg44mn"]
+
+[ext_resource type="FontFile" uid="uid://c2h07jn3xr6tq" path="res://fonts/Laila-Regular.ttf" id="1_kdugg"]
+[ext_resource type="Script" path="res://dialog_box.gd" id="1_rgduo"]
+[ext_resource type="FontFile" uid="uid://dvv3p4nw3crsk" path="res://fonts/Laila-Bold.ttf" id="2_535wo"]
+[ext_resource type="FontFile" uid="uid://ca0tcyh4ap0eh" path="res://fonts/Laila-Light.ttf" id="3_knrfb"]
+[ext_resource type="FontFile" uid="uid://i88p16kmb6bn" path="res://fonts/Laila-SemiBold.ttf" id="4_5adre"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scqu2"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_va0sh"]
+bg_color = Color(0.92549, 0.796078, 0.619608, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="DialogBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rgduo")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 45.0
+offset_top = 29.0
+offset_right = 862.0
+offset_bottom = 566.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_scqu2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 50.0
+offset_top = 34.0
+offset_right = 856.0
+offset_bottom = 560.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_va0sh")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.270588, 0.203922, 0.0980392, 1)
+theme_override_fonts/normal_font = ExtResource("1_kdugg")
+theme_override_fonts/bold_font = ExtResource("2_535wo")
+theme_override_fonts/italics_font = ExtResource("3_knrfb")
+theme_override_fonts/bold_italics_font = ExtResource("4_5adre")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+bbcode_enabled = true
+text = "Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity..."
+visible_characters = 0
+visible_ratio = 0.0
