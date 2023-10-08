@@ -1,7 +1,7 @@
 extends MarginContainer
 
 var mouseOnCard: bool = false
-const DEFAULT_ALPHA: float = 200. / 255.
+const DEFAULT_ALPHA: float = 100. / 255.
 var hoverOpacityChangeSpeed: float = 0.09
 
 var propData: PropData
@@ -12,7 +12,7 @@ var notRealShit = false # meaning that its not in the inventory but it's a dummy
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$TextureRect2.modulate.a = DEFAULT_ALPHA
-	print("hmm")
+	#print("hmm")
 	pass # Replace with function body.
 
 func load(propdata: PropData):
@@ -31,7 +31,7 @@ func _process(delta):
 			parentScene = get_parent()
 		var currentSelectedProp = parentScene.get_node("CurrentSelectedProp")
 		currentSelectedProp.texture = load(self.propData.propCardPath)
-		print(currentSelectedProp.name)
+		#print(currentSelectedProp.name)
 			
 		if $TextureRect2.modulate.a > 0:
 			$TextureRect2.modulate.a -= hoverOpacityChangeSpeed
@@ -46,7 +46,7 @@ func _input(event):
 	
 	if event is InputEventMouse:
 		if $TextureRect.get_global_rect().has_point(event.position):
-			print("asd3")
+			#print("asd3")
 			mouseOnCard = true
 		else:
 			mouseOnCard = false

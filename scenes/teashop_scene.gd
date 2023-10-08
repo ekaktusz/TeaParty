@@ -6,7 +6,7 @@ func check_ingredients():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(CustomerDatabase.customers.size())
+	#print(CustomerDatabase.customers.size())
 	reset()
 	
 var over = false
@@ -38,10 +38,10 @@ func reset():
 		$ing3.visible = false
 		$Button.disabled = true
 		if (not CustomerDatabase.getCurrentCustomer().introFinished):
-			print(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
+			#print(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
 			$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
-			print("hello")
-			print($DialogBox.get_text())
+			#print("hello")
+			#print($DialogBox.get_text())
 			$DialogBox.has_more = true
 		else:
 			$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().get_current_order_dialog())
@@ -71,7 +71,7 @@ func _process(delta):
 		
 func end_with_win():
 	CustomerDatabase.getCurrentCustomer().customerCurrentLevel += 1
-	print (CustomerDatabase.getCurrentCustomer().customerCurrentLevel)
+	#print (CustomerDatabase.getCurrentCustomer().customerCurrentLevel)
 	if CustomerDatabase.getCurrentCustomer().customerCurrentLevel == 3:
 		CustomerDatabase.removeCurrentCustomer()
 	if CustomerDatabase.customers.size() == 0:

@@ -11,7 +11,7 @@ var customers = [
 		"Grumpy Lumberjack",
 		"Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity...",
 		[
-			"I feel tired, let's see if you could give me some [b][i]caffeine[/i][/b].",
+			"I feel tired, let's see if you could give me some [b][i]caffeine[/i][/b]. \n[b]Select ingredients by clicking on them. Read the descriptions if you are unsure which one to use.[/b]",
 			"So you think you know tea, lad? [b]Same tea as last time[/b], but make it [b][i]spicy[/i][/b]!",
 			"Gives me [b]energy[/b], has some [b]spice[/b], but [b][i]the taste of home[/i][/b] is what your tea is still missing."
 		],
@@ -29,7 +29,7 @@ var customers = [
 		[
 			["Black Tea", "Mate Tea"],
 			["Bergamot", "Cloves"],
-			["Milk", "Whiskey"]
+			["Milk", "Whisky"]
 		]
 	),
 	CustomerData.new(

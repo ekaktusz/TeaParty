@@ -8,7 +8,7 @@ func _ready():
 	pass # Replace with function body.
 	
 func start_print_effect():
-	print("start_print_effect")
+	#print("start_print_effect")
 	self.is_complete = false
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
 	var tween = get_tree().create_tween()
@@ -21,8 +21,8 @@ func _process(delta):
 	pass
 	
 func set_text(text: String):
-	print("set_text")
-	print(text)
+	#print("set_text")
+	#print(text)
 	self.is_complete = false
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = text
 	
@@ -36,8 +36,8 @@ func tween_complete():
 	#get_parent().get_node("Button").disabled = false
 	
 func reset(text: String) -> void:
-	print("reset")
-	print(text)
+	#print("reset")
+	#print(text)
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
 	$Button.visible = false
 	self.is_complete = false
