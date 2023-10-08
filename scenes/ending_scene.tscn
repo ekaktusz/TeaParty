@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvv73q753kc5w"]
+
+[ext_resource type="Texture2D" uid="uid://c731kcdnlfml7" path="res://images/backgrounds/menu-background.png" id="1_1p01r"]
+[ext_resource type="Script" path="res://scenes/ending_scene.gd" id="1_54b2e"]
+[ext_resource type="FontFile" uid="uid://dtk2bneogp7sv" path="res://fonts/YoungSerif-Regular.ttf" id="2_cyajo"]
+[ext_resource type="FontFile" uid="uid://dvv3p4nw3crsk" path="res://fonts/Laila-Bold.ttf" id="3_lwhho"]
+[ext_resource type="StyleBox" uid="uid://c7qlbu0aec57n" path="res://scenes/menu_button_default.stylebox" id="4_5tnug"]
+[ext_resource type="StyleBox" uid="uid://dw66y5nm6hqmn" path="res://scenes/menu_button_hover.stylebox" id="5_v3hpi"]
+[ext_resource type="StyleBox" uid="uid://3whymixjrddr" path="res://scenes/menu_button_pressed.stylebox" id="6_eagio"]
+
+[node name="ending_scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_54b2e")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1p01r")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/shadow_outline_size = 15
+theme_override_fonts/font = ExtResource("2_cyajo")
+theme_override_font_sizes/font_size = 150
+text = "Your winner!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="StartButton" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_lwhho")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = ExtResource("4_5tnug")
+theme_override_styles/hover = ExtResource("5_v3hpi")
+theme_override_styles/pressed = ExtResource("6_eagio")
+text = "Restart Game"
+
+[node name="Label" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lwhho")
+theme_override_font_sizes/font_size = 30
+text = "Gerappa Games 2023"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/StartButton" to="." method="_on_start_button_pressed"]

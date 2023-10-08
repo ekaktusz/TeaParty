@@ -23,6 +23,7 @@ func _process(delta):
 func set_text(text: String):
 	print("set_text")
 	print(text)
+	self.is_complete = false
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = text
 	
 func get_text():

@@ -6,11 +6,15 @@ func check_ingredients():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(CustomerDatabase.customers.size())
 	reset()
 	
 var over = false
 	
 func reset():
+	if CustomerDatabase.getCurrentCustomer() == null:
+		return
+	
 	$customer.load_from_data(CustomerDatabase.getCurrentCustomer())
 	$Button2.disabled = true
 	$Button.disabled = true
@@ -49,6 +53,7 @@ func _process(delta):
 		$Button.disabled = false
 	
 	if self.over and not $customer.fading and $DialogBox.is_complete:
+		#await get_tree().create_timer(1.0).timeout
 		$customer.fade_out()
 		await get_tree().create_timer(2.0).timeout
 		
@@ -63,7 +68,14 @@ func _process(delta):
 		
 func end_with_win():
 	CustomerDatabase.getCurrentCustomer().customerCurrentLevel += 1
-	CustomerDatabase.nextCustomer()
+	print (CustomerDatabase.getCurrentCustomer().customerCurrentLevel)
+	if CustomerDatabase.getCurrentCustomer().customerCurrentLevel == 3:
+		CustomerDatabase.removeCurrentCustomer()
+	if CustomerDatabase.customers.size() == 0:
+		#await get_tree().create_timer(2.0).timeout
+		SceneTransition.change_scene_to_file("res://scenes/ending_scene.tscn")
+	else:
+		CustomerDatabase.nextCustomer()
 	pass
 	
 func end_with_lose():

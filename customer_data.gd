@@ -21,6 +21,10 @@ func _init(name, starter, orderDialogs, rejectionDialogs, acceptDialogs, imagePa
 	self.customerImage = imagePath
 	self.correctItems = items
 	pass
+	
+func reset():
+	self.customerCurrentLevel = 0
+	self.introFinished = false
 
 func get_current_order_dialog():
 	return customerOrderDialogs[customerCurrentLevel]
