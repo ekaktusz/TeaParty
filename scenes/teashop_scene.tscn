@@ -10,10 +10,12 @@
 [ext_resource type="StyleBox" uid="uid://dw66y5nm6hqmn" path="res://scenes/menu_button_hover.stylebox" id="7_288ub"]
 [ext_resource type="StyleBox" uid="uid://3whymixjrddr" path="res://scenes/menu_button_pressed.stylebox" id="8_hmopi"]
 [ext_resource type="StyleBox" uid="uid://b5iybcnhed637" path="res://scenes/menu_button_disabled.stylebox" id="9_h7dq8"]
-[ext_resource type="Texture2D" uid="uid://b2hub4e35qh08" path="res://images/props/bergamot.png" id="10_ypjny"]
 [ext_resource type="AudioStream" uid="uid://d38sr7103g0gu" path="res://sfx/sip.wav" id="11_6jiad"]
 [ext_resource type="AudioStream" uid="uid://q8wyh5en3ovw" path="res://sfx/sip_no.wav" id="12_nmoub"]
 [ext_resource type="AudioStream" uid="uid://inawl3fqyjyk" path="res://sfx/door_bell.wav" id="13_3iyq4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m6fwx"]
+load_path = "res://.godot/imported/bergamot.png-742a03ed342a142b76b691cdbc504560.ctex"
 
 [node name="teashop_scene" type="Control"]
 layout_mode = 3
@@ -94,7 +96,7 @@ offset_left = 715.0
 offset_top = 788.0
 offset_right = 845.0
 offset_bottom = 918.0
-texture = ExtResource("10_ypjny")
+texture = SubResource("CompressedTexture2D_m6fwx")
 expand_mode = 2
 
 [node name="ing2" type="TextureRect" parent="."]
@@ -104,7 +106,7 @@ offset_left = 920.0
 offset_top = 789.0
 offset_right = 1050.0
 offset_bottom = 919.0
-texture = ExtResource("10_ypjny")
+texture = SubResource("CompressedTexture2D_m6fwx")
 expand_mode = 2
 
 [node name="ing3" type="TextureRect" parent="."]
@@ -114,7 +116,7 @@ offset_left = 1141.0
 offset_top = 794.0
 offset_right = 1271.0
 offset_bottom = 924.0
-texture = ExtResource("10_ypjny")
+texture = SubResource("CompressedTexture2D_m6fwx")
 expand_mode = 2
 
 [node name="sip_accept" type="AudioStreamPlayer2D" parent="."]

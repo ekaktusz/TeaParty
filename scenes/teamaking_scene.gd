@@ -41,6 +41,121 @@ var props = [
 		"Cloves",
 		"res://images/props/cloves.png",
 		"res://images/cards/cloves.png"
+	),
+	PropData.new(
+		"Dried Fruits",
+		"res://images/props/dried_fruits.png",
+		"res://images/cards/dried_fruits.png"
+	),
+	PropData.new(
+		"Frogleg",
+		"res://images/props/frogleg.png",
+		"res://images/cards/frogleg.png"
+	),
+	PropData.new(
+		"Ginger",
+		"res://images/props/ginger.png",
+		"res://images/cards/ginger.png"
+	),
+	PropData.new(
+		"Green Tea",
+		"res://images/props/greentea.png",
+		"res://images/cards/green_tea.png"
+	),
+	PropData.new(
+		"Herbal Tea",
+		"res://images/props/herbaltea.png",
+		"res://images/cards/herbal_tea.png"
+	),
+	PropData.new(
+		"Honey",
+		"res://images/props/honey.png",
+		"res://images/cards/honey.png"
+	),
+	PropData.new(
+		"Jasmine Petal",
+		"res://images/props/jasmine.png",
+		"res://images/cards/jasmine_petal.png"
+	),
+	PropData.new(
+		"Lemon",
+		"res://images/props/lemon.png",
+		"res://images/cards/lemon.png"
+	),
+	PropData.new(
+		"Lizard Liver",
+		"res://images/props/lizard_liver.png",
+		"res://images/cards/lizard_liver.png"
+	),
+	PropData.new(
+		"Maple Syrup",
+		"res://images/props/maple_syrup.png",
+		"res://images/cards/maple_syrup.png"
+	),
+	PropData.new(
+		"Mate Tea",
+		"res://images/props/matetea.png",
+		"res://images/cards/mate_tea.png"
+	),
+	PropData.new(
+		"Milk",
+		"res://images/props/milk.png",
+		"res://images/cards/milk.png"
+	),
+	PropData.new(
+		"Nutmeg",
+		"res://images/props/nutmeg.png",
+		"res://images/cards/nutmeg.png"
+	),
+	PropData.new(
+		"Orange Peels",
+		"res://images/props/orange_peel.png",
+		"res://images/cards/orange_peels.png"
+	),
+	PropData.new(
+		"Poppy Seed",
+		"res://images/props/poppy_seed.png",
+		"res://images/cards/poppy_seed.png"
+	),
+	PropData.new(
+		"Roiboss",
+		"res://images/props/roiboss.png",
+		"res://images/cards/roiboss.png"
+	),
+	PropData.new(
+		"Rose Petal",
+		"res://images/props/rose.png",
+		"res://images/cards/rose_petal.png"
+	),
+	PropData.new(
+		"Unicorn Feather",
+		"res://images/props/unicorn_feather.png",
+		"res://images/cards/unicorn_feather.png"
+	),
+	PropData.new(
+		"Vanilla",
+		"res://images/props/vanilla.png",
+		"res://images/cards/vanilla.png"
+	),
+	PropData.new(
+		"Vinegar",
+		"res://images/props/vinegar.png",
+		"res://images/cards/vinegar.png"
+	),
+	PropData.new(
+		"Water of Life",
+		"res://images/props/water_of_life.png",
+		"res://images/cards/water_of_life.png"
+	),
+	PropData.new(
+		"Whisky",
+		"res://images/props/whisky.png",
+		"res://images/cards/whisky.png"
+	),
+	PropData.new(
+		"White Tea",
+		"res://images/props/whitetea.png",
+		"res://images/cards/white_tea.png"
 	)
 ]
 

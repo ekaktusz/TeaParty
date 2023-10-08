@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/teamaking_scene.gd" id="1_7obi3"]
 [ext_resource type="Texture2D" uid="uid://k8ogg2sqqx61" path="res://images/backgrounds/teamaking-background.png" id="1_887p3"]
-[ext_resource type="Texture2D" uid="uid://b7jbemlx8cl4" path="res://images/cards/bergamot.png" id="4_ndl8t"]
 [ext_resource type="FontFile" uid="uid://dvv3p4nw3crsk" path="res://fonts/Laila-Bold.ttf" id="5_j3yw8"]
 [ext_resource type="PackedScene" uid="uid://br8gqbgh5hdkd" path="res://prop_menu.tscn" id="5_jbjps"]
 [ext_resource type="StyleBox" uid="uid://c7qlbu0aec57n" path="res://scenes/menu_button_default.stylebox" id="6_ketyg"]
@@ -14,6 +13,9 @@
 [ext_resource type="FontFile" uid="uid://i88p16kmb6bn" path="res://fonts/Laila-SemiBold.ttf" id="12_klwbg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4cqo"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ilp77"]
+load_path = "res://.godot/imported/bergamot.png-fec4dd602b45d6dd49d67a95b2fd72ea.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lybp"]
 bg_color = Color(0, 0, 0, 1)
@@ -44,7 +46,7 @@ texture = SubResource("CompressedTexture2D_v4cqo")
 [node name="CurrentSelectedProp" type="Sprite2D" parent="."]
 position = Vector2(1538, 419)
 scale = Vector2(0.276801, 0.276801)
-texture = ExtResource("4_ndl8t")
+texture = SubResource("CompressedTexture2D_ilp77")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 485.0

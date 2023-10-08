@@ -8,12 +8,12 @@ var inactiveCustomers = [
 
 var customers = [
 	CustomerData.new(
-		"Grumpy lumberman",
+		"Grumpy Lumberjack",
 		"Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity...",
 		[
-			"I feel tired, let's see if you could give me some [b]caffeine[/b].",
-			"So you think you know tea, lad? Same tea as last time, but make it spicy! (bergamot // cloves)",
-			"Gives me energy, has some spice, but the taste of home is what your tea is still missing. (milk // whisky)"
+			"I feel tired, let's see if you could give me some [b][i]caffeine[/i][/b].",
+			"So you think you know tea, lad? [b]Same tea as last time[/b], but make it [b][i]spicy[/i][/b]!",
+			"Gives me [b]energy[/b], has some [b]spice[/b], but [b][i]the taste of home[/i][/b] is what your tea is still missing."
 		],
 		[
 			"Bloody hell, this isn't what I asked for, mate! ",
@@ -29,16 +29,16 @@ var customers = [
 		[
 			["Black Tea", "Mate Tea"],
 			["Bergamot", "Cloves"],
-			["Black Tea", "Mate Tea"]
+			["Milk", "Whiskey"]
 		]
 	),
 	CustomerData.new(
 		"Heartbroken Butcher",
 		"Greetings! You know me, you buy meat at my shop. Anyway... those were better days... My gal just left me! What am I supposed to do now?!",
 		[
-			"To be honest I don't even care, just give me something that resembles the colors of different seasons, when life was happier... (green tea // white tea)",
-			"Hey... Now that you got the colors right, could you put in some sour stuff to better match my mood? (lemon // vinegar)",
-			"I like the color, the sourness is just fine, and I don't need salt, my tears are enought... Oh I see a girls name in your inventory though... (Rose petals // Jasmine petals)"
+			"To be honest I don't even care, just give me something that resembles the [b][i]colors of different seasons[/b][/i], when life was happier...",
+			"Hey... Now that you got the [b]colors[/b] right, could you put in some [b][i]sour stuff[/b][/i] to better match my mood?",
+			"I like the [b]color[/b], the [b]sourness[/b] is just fine, and I don't need salt, my tears are enought... Oh I see a [b][i]girls name[/b][/i] in your inventory though..."
 		],
 		[
 			"It tastes just how I feel. Awful!",
@@ -54,20 +54,20 @@ var customers = [
 		[
 			["Green Tea", "White Tea"],
 			["Lemon", "Vinegar"],
-			["Rose Petals", "Jasmine Petals"]
+			["Rose Petal", "Jasmine Petal"]
 		]
 	),
 	CustomerData.new(
-		"Witch Girl",
+		"Little Witch",
 		"I gotta get my homework done quick, or my master will surely turn me into a mouse... But maybe a cup of tea could help the creative juices flowing. ",
 		[
-			"Hey, mister. I wanna drink something that makes me extra bouncy/jumpy. (frogleg // roiboss)",
-			"I loved the jumpy juice! Can you also add something small and adorable to it (like me)? Pretty please! (lizard liver // poppy seed)",
-			"Okay. Jumpy - check. Smol - check. Now, I want you to add something MAGICAL to the mix! (unicorn feather (szivárványszínű) // water of life)"
+			"Hey, mister. I wanna drink something that [b][i]makes me extra jumpy[/i][/b].",
+			"I loved the [b]jumpy juice[/b]! Can you also add something [b][i]small and adorable[/i][/b] to it (like me)? Pretty please!",
+			"Okay. [b]Jumpy[/b] - check. [b]Smol[/b] - check. Now, I want you to add something [b][i]MAGICAL[/i][/b] to the mix!"
 		],
 		[
 			"Eww! I don't want it!",
-			"Mom, can you come and pick me up? :(",
+			"Mom, can you come and pick me up? 🙁",
 			"That ain't magic, mister. "
 		],
 		[
@@ -78,10 +78,86 @@ var customers = [
 		"res://images/characthers/CozyJam2023_Kid_happy.png",
 		[
 			["Frogleg", "Roiboss"],
-			["Lizar Liver", "Poppy Seed"],
-			["Unicorn Feather", "Water Of Life"]
+			["Lizard Liver", "Poppy Seed"],
+			["Unicorn Feather", "Water of Life"]
+		]
+	),
+		CustomerData.new(
+		"Painter Girl",
+		"I love the smell of rain, but I just can't paint anything in this weather.",
+		[
+			"Hi! I'm feeling [b][i]fruity[/i][/b] today. Hit me with your best fruit tea.",
+			"I loved the [b]fruits[/b] last time, but I'm also looking forward to the holiday season. Can you make me something that's also a bit [b][i]festive[/i][/b], please?",
+			"I know this will sound weird, but... Can you make me a [b]festive[/b], [b]fruit tea[/b], that also tastes a bit like a [b][i]bowl of ice cream[/i][/b]?"
+		],
+		[
+			"Thanks, but no thanks.",
+			"Nope.",
+			"No. Just no."
+		],
+		[
+			"Thanks, man.",
+			"OMG! I Love it!",
+			"AMAZING! Huh, I spent all day in here, and managed to paint some pretty cool stuff after all. Now, can you tell me a bit more about that handsome butcher boy?;)"
+		],
+		"res://images/characthers/CozyJam2023_paintergirl.png",
+		[
+			["Dried Fruits", "Orange Peels"],
+			["Cinnamon", "Nutmeg"],
+			["Vanilla", "Chocolate"]
+		]
+	),
+		CustomerData.new(
+		"Flower Woman",
+		"What a lovely little tea shop. I can't sell my flowers, because it's so cold outside. But maybe I can warm myself up here, and go back to work refreshed.",
+		[
+			"Good morning, dear. I feel a chill in my bones. Can I ask for something that [b][i]warms[/i][/b] me up?",
+			"Loved the [b]warmth[/b] of that tea. But I do like something [b][i]sugary[/i][/b] in my cup. (Just don't tell my husband. We're on a diet.)",
+			"I loved the [b]warmth[/b] and the [b]sweetness[/b], but I'm still missing something. If it isn't too much trouble, can you add something with a bit more... [b][i]heat[/i][/b]?"
+		],
+		[
+			"Oh, dear. I still feel cold...",
+			"That is not the sweetness I was looking for.",
+			"Splendid work, truly. Just not for me."
+		],
+		[
+			"Lovely. Just like my nana used to make.",
+			"My goodness! Darling, you're a natural!",
+			"HELL YEAH, give me more of those Scoville levels!!! WHO WANTS SOME FLOWERS???"
+		],
+		"res://images/characthers/CozyJam2023_granny.png",
+		[
+			["Chamomile", "Herbal Tea"],
+			["Honey", "Maple Syrup"],
+			["Chili", "Ginger"]
+		]
+	),
+		CustomerData.new(
+		"Punk",
+		"Oi, where am I? Had a banger last night with me mates. Got any change? Need for the bus.",
+		[
+			"Oi barman, give me a [b][i]beer[/i][/b]... or [b][i]whatever[/i][/b].",
+			"Can I get another [b][i]beer[/i][/b], boss? ",
+			"Can me taste another of your [b][i]special ale[/i][/b] please?"
+		],
+		[
+			"Eww! I don't want it!",
+			"Mom, can you come and pick me up? 🙁",
+			"That ain't magic, mister. "
+		],
+		[
+			"A drink is a drink alright. (slurp)",
+			"Cheers! (slurp) It was decent, mate. ",
+			"You wasn't kidding, this is the tastiest beverage kissed me lips in a long time. I need to bring me mates to your fine establishment."
+		],
+		"res://images/characthers/CozyJam2023_punk.png",
+		[
+			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whiskey", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"],
+			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whiskey", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"],
+			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whiskey", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"]
 		]
 	)
+	
 ]
 
 var currentCustomer: int = randi() % self.customers.size()
