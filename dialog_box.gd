@@ -11,7 +11,7 @@ func _ready():
 func start_print_effect():
 	self.is_complete = false
 	tween = get_tree().create_tween()
-	tween.tween_property($MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel, "visible_ratio", 1, 3)
+	tween.tween_property($MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel, "visible_ratio", 1, 2)
 	tween.tween_callback(self.tween_complete)
 	
 func _process(delta):

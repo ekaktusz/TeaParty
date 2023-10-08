@@ -36,18 +36,22 @@ func reset():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if $DialogBox.is_complete and self.over:
+	if $DialogBox.is_complete and not $DialogBox.has_more and not self.over:
+		$Button.disabled = false
+	
+	if self.over and not $customer.fading and $DialogBox.is_complete:
+		$customer.fade_out()
+		await get_tree().create_timer(2.0).timeout
+		
 		if check_ingredients():
 			end_with_win()
 		else:
 			end_with_lose()
 		SelectedIngredient.reset()
 		self.over = false
-		$customer.fade_out()
 		reset()
+		$customer.fade_in()
 	
-	if $DialogBox.is_complete and not $DialogBox.has_more:
-		$Button.disabled = false
 		
 func end_with_win():
 	CustomerDatabase.getCurrentCustomer().customerCurrentLevel += 1
