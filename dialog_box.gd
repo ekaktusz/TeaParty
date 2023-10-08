@@ -47,4 +47,3 @@ func clear():
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
 	pass
 	
-	

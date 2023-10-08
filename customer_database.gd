@@ -79,5 +79,22 @@ var customers = [
 	
 ]
 
+func removeCurrentCustomer():
+	for item in self.customers:
+		if item.customerName == self.getCurrentCustomer().customerName:
+			self.customers.remove(item)
+
 func getCurrentCustomer() -> CustomerData:
 	return self.customers[self.currentCustomer]
+	
+func nextCustomer():
+	if self.getCurrentCustomer().customerCurrentLevel > 3:
+		removeCurrentCustomer()
+	
+	var nextCustomerId = randi() % self.customers.size()
+	while (nextCustomerId == self.currentCustomer):
+		nextCustomerId = randi() % self.customers.size()
+	
+	CustomerDatabase.currentCustomer = nextCustomerId
+	return
+
