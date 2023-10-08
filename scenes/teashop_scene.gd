@@ -62,11 +62,19 @@ func _process(delta):
 		
 func end_with_win():
 	CustomerDatabase.getCurrentCustomer().customerCurrentLevel += 1
-	CustomerDatabase.currentCustomer += 1
+	var nextCustomerId: int 
+	while (nextCustomerId == CustomerDatabase.currentCustomer):
+		nextCustomerId = randi() % CustomerDatabase.customers.size()
+	
+	CustomerDatabase.currentCustomer = nextCustomerId
 	pass
 	
 func end_with_lose():
-	CustomerDatabase.currentCustomer += 1
+	var nextCustomerId:int 
+	while (nextCustomerId == CustomerDatabase.currentCustomer):
+		nextCustomerId = randi() % CustomerDatabase.customers.size()
+		
+	CustomerDatabase.currentCustomer = nextCustomerId
 	pass
 
 func _input(event):
