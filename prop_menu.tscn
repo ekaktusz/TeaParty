@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://br8gqbgh5hdkd"]
+[gd_scene load_steps=4 format=3 uid="uid://br8gqbgh5hdkd"]
 
 [ext_resource type="Script" path="res://prop_menu.gd" id="1_vu4vh"]
 [ext_resource type="Texture2D" uid="uid://b2hub4e35qh08" path="res://images/props/bergamot.png" id="2_gasha"]
+[ext_resource type="AudioStream" uid="uid://h66yomi2ml4t" path="res://sfx/sfx_submerge.wav" id="3_fj7pf"]
 
 [node name="prop_menu" type="MarginContainer"]
 theme_override_constants/margin_left = 5
@@ -22,3 +23,6 @@ custom_minimum_size = Vector2(130, 130)
 layout_mode = 2
 texture = ExtResource("2_gasha")
 expand_mode = 2
+
+[node name="blub" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fj7pf")

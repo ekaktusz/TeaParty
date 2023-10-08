@@ -57,6 +57,7 @@ func _input(event):
 				var parentScene = get_parent().get_parent()
 				if parentScene.can_select():
 					self.disable()
+					$blub.play()
 					parentScene.select_prop(self.propData)
 			else:
 				get_parent().return_prop(self.propData)

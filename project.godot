@@ -22,6 +22,7 @@ SceneTransition="*res://scene_transition.tscn"
 CustomerDatabase="*res://customer_database.gd"
 SelectedIngredient="*res://selected_ingredients.gd"
 BgNoises="*res://bg_noises.tscn"
+SteamSound="*res://steam_sound.tscn"
 
 [display]
 

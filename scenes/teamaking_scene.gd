@@ -91,6 +91,7 @@ func select_prop(propData: PropData):
 		return
 
 func _on_selec_button_pressed():
+	SteamSound.play()
 	SceneTransition.change_scene_to_file("res://scenes/teashop_scene.tscn")
 	SelectedIngredient.prop1 = $SelectedProp1.propData
 	SelectedIngredient.prop2 = $SelectedProp2.propData

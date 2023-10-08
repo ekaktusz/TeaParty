@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6xnbediffgws"]
+
+[ext_resource type="AudioStream" uid="uid://1uy1excqtgfm" path="res://sfx/water-pour-steam-hiss.wav" id="1_8v8op"]
+
+[node name="steam" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_8v8op")
