@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://4a60ot8exgno"]
+[gd_scene load_steps=14 format=3 uid="uid://4a60ot8exgno"]
 
 [ext_resource type="Texture2D" uid="uid://cptw1l2k3a5t2" path="res://images/backgrounds/teashop-background.png" id="1_sr4s6"]
 [ext_resource type="Script" path="res://scenes/teashop_scene.gd" id="1_uiaff"]
@@ -10,6 +10,9 @@
 [ext_resource type="StyleBox" uid="uid://3whymixjrddr" path="res://scenes/menu_button_pressed.stylebox" id="8_hmopi"]
 [ext_resource type="StyleBox" uid="uid://b5iybcnhed637" path="res://scenes/menu_button_disabled.stylebox" id="9_h7dq8"]
 [ext_resource type="Texture2D" uid="uid://b2hub4e35qh08" path="res://images/props/bergamot.png" id="10_ypjny"]
+[ext_resource type="AudioStream" uid="uid://d38sr7103g0gu" path="res://sfx/sip.wav" id="11_6jiad"]
+[ext_resource type="AudioStream" uid="uid://q8wyh5en3ovw" path="res://sfx/sip_no.wav" id="12_nmoub"]
+[ext_resource type="AudioStream" uid="uid://inawl3fqyjyk" path="res://sfx/door_bell.wav" id="13_3iyq4"]
 
 [node name="teashop_scene" type="Control"]
 layout_mode = 3
@@ -101,6 +104,15 @@ offset_right = 1271.0
 offset_bottom = 924.0
 texture = ExtResource("10_ypjny")
 expand_mode = 2
+
+[node name="sip_accept" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_6jiad")
+
+[node name="sip_decline" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_nmoub")
+
+[node name="door_bell" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_3iyq4")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_select_ing_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_serve_pressed"]

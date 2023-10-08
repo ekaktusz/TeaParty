@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfvrlo52sx6ee"]
+
+[ext_resource type="AudioStream" uid="uid://b3lqsegfpagb6" path="res://sfx/93740__ptrckd__teashop.wav" id="1_gbcyb"]
+
+[node name="bg_noises" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_gbcyb")
+volume_db = -8.513

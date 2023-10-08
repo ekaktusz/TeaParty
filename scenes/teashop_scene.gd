@@ -7,6 +7,7 @@ func check_ingredients():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print(CustomerDatabase.customers.size())
+	BgNoises.play()
 	reset()
 	
 var over = false
@@ -45,6 +46,8 @@ func reset():
 		else:
 			$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().get_current_order_dialog())
 		
+		$door_bell.play()
+		
 	$customer.fade_in()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,6 +76,7 @@ func end_with_win():
 		CustomerDatabase.removeCurrentCustomer()
 	if CustomerDatabase.customers.size() == 0:
 		#await get_tree().create_timer(2.0).timeout
+		BgNoises.stop()
 		SceneTransition.change_scene_to_file("res://scenes/ending_scene.tscn")
 	else:
 		CustomerDatabase.nextCustomer()
@@ -102,8 +106,10 @@ func play_losing_dialog():
 
 func _on_button_serve_pressed():
 	if check_ingredients():
+		$sip_accept.play()
 		play_winning_dialog()
 	else:
+		$sip_decline.play()
 		play_losing_dialog()
 	$Button2.disabled = true
 	$Button.disabled = true
