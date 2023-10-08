@@ -11,5 +11,6 @@ func _process(delta):
 	pass
 
 func _on_start_button_pressed():
+	BgNoises.play()
 	SceneTransition.change_scene_to_file("res://scenes/teashop_scene.tscn")
 	pass # Replace with function body.

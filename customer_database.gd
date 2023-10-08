@@ -160,13 +160,12 @@ var customers = [
 	
 ]
 
-var currentCustomer: int = randi() % self.customers.size()
+var currentCustomer: int = 0
 
 func removeCurrentCustomer():
 	self.getCurrentCustomer().reset()
 	self.inactiveCustomers.append(self.getCurrentCustomer())
 	self.customers.erase(self.getCurrentCustomer())
-
 
 func getCurrentCustomer() -> CustomerData:
 	if CustomerDatabase.customers.size() == 0:

@@ -7,7 +7,6 @@ func check_ingredients():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print(CustomerDatabase.customers.size())
-	BgNoises.play()
 	reset()
 	
 var over = false
