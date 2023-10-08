@@ -22,7 +22,6 @@ func fade_in():
 	tween.tween_property($Sprite2D, "modulate", target_color, 2)
 	tween.tween_callback(self.fade_complete)
 	
-	
 	var tween2 = get_tree().create_tween()
 	tween2.tween_property(dbox, "modulate", target_color, 2)
 	if not SelectedIngredient.is_valid():

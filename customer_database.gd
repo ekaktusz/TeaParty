@@ -5,6 +5,7 @@ var playerCurrentLevel: int = 0 # only grow if all characthers reached the next 
 var inactiveCustomers = [
 	
 ]
+
 var customers = [
 	CustomerData.new(
 		"Grumpy lumberman",
@@ -99,12 +100,34 @@ func getCurrentCustomer() -> CustomerData:
 func nextCustomer():
 	if (CustomerDatabase.customers.size() == 1):
 		return
-	
-	var nextCustomerId = randi() % self.customers.size()
-	while (nextCustomerId == self.currentCustomer):
-		nextCustomerId = randi() % self.customers.size()
-	
-	CustomerDatabase.currentCustomer = nextCustomerId
+		
+	var customersOnThisLevel = getAllCharacthersOnThisLevel()
+	if customersOnThisLevel.size() == 0:
+		playerCurrentLevel += 1
+		nextCustomer()
+		
+	if customersOnThisLevel.size() == 1:
+		self.currentCustomer = findCustomerId(customersOnThisLevel[0])
+		return
+		
+	if customersOnThisLevel.size() > 1:
+		var candidate = customersOnThisLevel[0]
+		while candidate.customerName == getCurrentCustomer().customerName:
+			candidate = customersOnThisLevel[randi() % customersOnThisLevel.size()]
+		self.currentCustomer = findCustomerId(candidate)
+		return 
 	return
 
-
+func getAllCharacthersOnThisLevel():
+	var allCustomerOnThisLevel = []
+	for customer in self.customers:
+		if customer.customerCurrentLevel == self.playerCurrentLevel:
+			allCustomerOnThisLevel.append(customer)
+	return allCustomerOnThisLevel
+	
+func findCustomerId(customerData: CustomerData):
+	for i in range(0, self.customers.size()):
+		var customer = self.customers[i]
+		if customer.customerName == customerData.customerName:
+			return i
+	return 400 # XD
