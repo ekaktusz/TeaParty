@@ -50,7 +50,33 @@ var customers = [
 			["Lemon", "Vinegar"],
 			["Rose Petals", "Jasmine Petals"]
 		]
+	),
+	CustomerData.new(
+		"Witch Girl",
+		"I gotta get my homework done quick, or my master will surely turn me into a mouse... But maybe a cup of tea could help the creative juices flowing. ",
+		[
+			"Hey, mister. I wanna drink something that makes me extra bouncy/jumpy. (frogleg // roiboss)",
+			"I loved the jumpy juice! Can you also add something small and adorable to it (like me)? Pretty please! (lizard liver // poppy seed)",
+			"Okay. Jumpy - check. Smol - check. Now, I want you to add something MAGICAL to the mix! (unicorn feather (szivárványszínű) // water of life)"
+		],
+		[
+			"Eww! I don't want it!",
+			"Mom, can you come and pick me up? :(",
+			"That ain't magic, mister. "
+		],
+		[
+			"Ah! That sure was something, mister.",
+			"Ah! Just what I needed.",
+			"Muhahaha! FOOL! You did it! YOU DID IT FOR ME! You finished my homework without even knowing. See ya, nerd!"
+		],
+		"res://images/characthers/CozyJam2023_Kid_happy.png",
+		[
+			["Frogleg", "Roiboss"],
+			["Lizar Liver", "Poppy Seed"],
+			["Unicorn Feather", "Water Of Life"]
+		]
 	)
+	
 ]
 
 func getCurrentCustomer() -> CustomerData:

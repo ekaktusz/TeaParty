@@ -114,7 +114,7 @@ theme_override_font_sizes/italics_font_size = 30
 theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/mono_font_size = 30
 bbcode_enabled = true
-text = "Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity..."
+text = "LOREM IPSE"
 visible_characters = 0
 visible_ratio = 0.0
 

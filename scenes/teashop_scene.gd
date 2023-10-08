@@ -31,8 +31,16 @@ func reset():
 		$ing1.visible = false
 		$ing2.visible = false
 		$ing3.visible = false
-		$DialogBox.start_print_effect()
-	pass # Replace with function body.
+		if (not CustomerDatabase.getCurrentCustomer().introFinished):
+			print(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
+			$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
+			print("hello")
+			print($DialogBox.get_text())
+			$DialogBox.has_more = true
+		else:
+			$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().get_current_order_dialog())
+		
+	$customer.fade_in()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -50,7 +58,6 @@ func _process(delta):
 		SelectedIngredient.reset()
 		self.over = false
 		reset()
-		$customer.fade_in()
 	
 		
 func end_with_win():
@@ -73,13 +80,11 @@ func _input(event):
 func play_winning_dialog():
 	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
 	$DialogBox.reset(cust.customerOrderAcceptDialogs[cust.customerCurrentLevel])
-	$DialogBox.start_print_effect()
 	self.over = true
 	
 func play_losing_dialog():
 	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
 	$DialogBox.reset(cust.customerOrderRejectionDialogs[cust.customerCurrentLevel])
-	$DialogBox.start_print_effect()
 	self.over = true
 
 func _on_button_serve_pressed():

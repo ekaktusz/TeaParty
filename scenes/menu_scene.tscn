@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c5i6tvxwuxwxy"]
 
 [ext_resource type="Script" path="res://scenes/menu_scene.gd" id="1_dlhbc"]
-[ext_resource type="Texture2D" uid="uid://cptw1l2k3a5t2" path="res://images/backgrounds/teashop-background.png" id="2_5lbvq"]
+[ext_resource type="Texture2D" uid="uid://c731kcdnlfml7" path="res://images/backgrounds/menu-background.png" id="2_w160u"]
 [ext_resource type="FontFile" uid="uid://dtk2bneogp7sv" path="res://fonts/YoungSerif-Regular.ttf" id="3_kcp8i"]
 [ext_resource type="FontFile" uid="uid://dvv3p4nw3crsk" path="res://fonts/Laila-Bold.ttf" id="4_lwp6f"]
 [ext_resource type="StyleBox" uid="uid://c7qlbu0aec57n" path="res://scenes/menu_button_default.stylebox" id="5_d2b7m"]
@@ -24,7 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_5lbvq")
+texture = ExtResource("2_w160u")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
