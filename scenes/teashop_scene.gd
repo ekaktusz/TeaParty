@@ -19,6 +19,7 @@ func reset():
 	$customer.load_from_data(CustomerDatabase.getCurrentCustomer())
 	$Button2.disabled = true
 	$Button.disabled = true
+	$click_for_next.modulate.a = 0
 
 	if (SelectedIngredient.is_valid()): # when return to teashop
 		$ing1.texture = load(SelectedIngredient.prop1.propIconPath)
@@ -50,24 +51,24 @@ func reset():
 		
 	$customer.fade_in()
 
+func on_over_this_customer():
+	$customer.fade_out()
+	await get_tree().create_timer(1.0).timeout
+	$DialogBox.clear()
+	if check_ingredients():
+		end_with_win()
+	else:
+		end_with_lose()
+	SelectedIngredient.reset()
+	self.over = false
+	reset()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $DialogBox.is_complete and not $DialogBox.has_more and not self.over and not $customer.fading:
 		$Button.disabled = false
-	
-	if self.over and not $customer.fading and $DialogBox.is_complete:
-		#await get_tree().create_timer(1.0).timeout
-		$customer.fade_out()
-		await get_tree().create_timer(2.0).timeout
-		
-		if check_ingredients():
-			end_with_win()
-		else:
-			end_with_lose()
-		SelectedIngredient.reset()
-		self.over = false
-		reset()
-	
+	if self.over and not $customer.fading and $DialogBox.is_complete and $click_for_next.modulate.a == 0:
+		show_next_customer_button()
 		
 func end_with_win():
 	CustomerDatabase.getCurrentCustomer().customerCurrentLevel += 1
@@ -85,6 +86,18 @@ func end_with_win():
 func end_with_lose():
 	CustomerDatabase.nextCustomer()
 	pass
+	
+func show_next_customer_button():
+	$click_for_next.modulate.a = 0
+	var target_color = Color(1, 1, 1, 1)
+	var tween = get_tree().create_tween()
+	tween.tween_property($click_for_next, "modulate", target_color, 1)
+	
+func hide_next_customer_button():
+	$click_for_next.modulate.a = 1
+	var target_color = Color(1, 1, 1, 0)
+	var tween = get_tree().create_tween()
+	tween.tween_property($click_for_next, "modulate", target_color, 1)
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -93,6 +106,9 @@ func _input(event):
 				CustomerDatabase.getCurrentCustomer().introFinished = true
 				$DialogBox.has_more = false
 				$DialogBox.reset(CustomerDatabase.getCurrentCustomer().customerOrderDialogs[0]) #ugyis csak az elsonel kell
+			if self.over and not $customer.fading and $DialogBox.is_complete:
+				on_over_this_customer()
+				hide_next_customer_button()
 
 func play_winning_dialog():
 	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
@@ -116,6 +132,7 @@ func _on_button_serve_pressed():
 	$ing1.visible = false
 	$ing2.visible = false
 	$ing3.visible = false
+	
 	pass # Replace with function body.
 
 func _on_button_select_ing_pressed():

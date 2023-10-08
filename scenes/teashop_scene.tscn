@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://4a60ot8exgno"]
+[gd_scene load_steps=15 format=3 uid="uid://4a60ot8exgno"]
 
 [ext_resource type="Texture2D" uid="uid://cptw1l2k3a5t2" path="res://images/backgrounds/teashop-background.png" id="1_sr4s6"]
 [ext_resource type="Script" path="res://scenes/teashop_scene.gd" id="1_uiaff"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://deb0m42tg44mn" path="res://dialog_box.tscn" id="2_njk2m"]
 [ext_resource type="StyleBox" uid="uid://c7qlbu0aec57n" path="res://scenes/menu_button_default.stylebox" id="5_1omu1"]
 [ext_resource type="FontFile" uid="uid://dvv3p4nw3crsk" path="res://fonts/Laila-Bold.ttf" id="5_c58nw"]
+[ext_resource type="Texture2D" uid="uid://bik5omnbseaoc" path="res://images/backgrounds/counter-bacground.png" id="5_yeilq"]
 [ext_resource type="StyleBox" uid="uid://dw66y5nm6hqmn" path="res://scenes/menu_button_hover.stylebox" id="7_288ub"]
 [ext_resource type="StyleBox" uid="uid://3whymixjrddr" path="res://scenes/menu_button_pressed.stylebox" id="8_hmopi"]
 [ext_resource type="StyleBox" uid="uid://b5iybcnhed637" path="res://scenes/menu_button_disabled.stylebox" id="9_h7dq8"]
@@ -42,6 +43,17 @@ offset_bottom = 413.0
 
 [node name="customer" parent="." instance=ExtResource("2_dqf5b")]
 position = Vector2(962, 145)
+
+[node name="table_front" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_yeilq")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -113,6 +125,17 @@ stream = ExtResource("12_nmoub")
 
 [node name="door_bell" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_3iyq4")
+
+[node name="click_for_next" type="Label" parent="."]
+layout_mode = 0
+offset_left = 627.0
+offset_top = 627.0
+offset_right = 1357.0
+offset_bottom = 724.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_c58nw")
+theme_override_font_sizes/font_size = 60
+text = "Click for next customer!"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_select_ing_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_serve_pressed"]

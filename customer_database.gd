@@ -1,5 +1,6 @@
 extends Node
-var currentCustomer: int = 0
+
+var playerCurrentLevel: int = 0 # only grow if all characthers reached the next level
 
 var inactiveCustomers = [
 	
@@ -82,10 +83,13 @@ var customers = [
 	)
 ]
 
+var currentCustomer: int = randi() % self.customers.size()
+
 func removeCurrentCustomer():
 	self.getCurrentCustomer().reset()
 	self.inactiveCustomers.append(self.getCurrentCustomer())
 	self.customers.erase(self.getCurrentCustomer())
+
 
 func getCurrentCustomer() -> CustomerData:
 	if CustomerDatabase.customers.size() == 0:
@@ -102,3 +106,5 @@ func nextCustomer():
 	
 	CustomerDatabase.currentCustomer = nextCustomerId
 	return
+
+
