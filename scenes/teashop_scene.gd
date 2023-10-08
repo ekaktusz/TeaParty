@@ -31,6 +31,7 @@ func reset():
 		$ing1.visible = false
 		$ing2.visible = false
 		$ing3.visible = false
+		$Button.disabled = true
 		if (not CustomerDatabase.getCurrentCustomer().introFinished):
 			print(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
 			$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
@@ -44,7 +45,7 @@ func reset():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if $DialogBox.is_complete and not $DialogBox.has_more and not self.over:
+	if $DialogBox.is_complete and not $DialogBox.has_more and not self.over and not $customer.fading:
 		$Button.disabled = false
 	
 	if self.over and not $customer.fading and $DialogBox.is_complete:
@@ -62,19 +63,11 @@ func _process(delta):
 		
 func end_with_win():
 	CustomerDatabase.getCurrentCustomer().customerCurrentLevel += 1
-	var nextCustomerId: int 
-	while (nextCustomerId == CustomerDatabase.currentCustomer):
-		nextCustomerId = randi() % CustomerDatabase.customers.size()
-	
-	CustomerDatabase.currentCustomer = nextCustomerId
+	CustomerDatabase.nextCustomer()
 	pass
 	
 func end_with_lose():
-	var nextCustomerId:int 
-	while (nextCustomerId == CustomerDatabase.currentCustomer):
-		nextCustomerId = randi() % CustomerDatabase.customers.size()
-		
-	CustomerDatabase.currentCustomer = nextCustomerId
+	CustomerDatabase.nextCustomer()
 	pass
 
 func _input(event):
@@ -101,6 +94,7 @@ func _on_button_serve_pressed():
 	else:
 		play_losing_dialog()
 	$Button2.disabled = true
+	$Button.disabled = true
 	$ing1.visible = false
 	$ing2.visible = false
 	$ing3.visible = false

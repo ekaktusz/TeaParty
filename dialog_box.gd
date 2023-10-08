@@ -32,6 +32,7 @@ func tween_complete():
 	self.is_complete = true
 	$Button.visible = has_more
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 1
+	#get_parent().get_node("Button").disabled = false
 	
 func reset(text: String) -> void:
 	print("reset")
