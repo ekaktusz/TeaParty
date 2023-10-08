@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dcky60wrflodm"
-path="res://.godot/imported/unicorn feather.png-602244836d30cbabaa86357a30796fb1.ctex"
+path="res://.godot/imported/unicorn_feather.png-28ee17e50c89a7b0a7db9ff033175551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/cards/unicorn feather.png"
-dest_files=["res://.godot/imported/unicorn feather.png-602244836d30cbabaa86357a30796fb1.ctex"]
+source_file="res://images/cards/unicorn_feather.png"
+dest_files=["res://.godot/imported/unicorn_feather.png-28ee17e50c89a7b0a7db9ff033175551.ctex"]
 
 [params]
 

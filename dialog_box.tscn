@@ -119,7 +119,6 @@ visible_characters = 0
 visible_ratio = 0.0
 
 [node name="Button" type="Button" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 568.0
 offset_top = 252.0

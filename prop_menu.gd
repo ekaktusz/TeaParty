@@ -1,8 +1,8 @@
 extends MarginContainer
 
 var mouseOnCard: bool = false
-const DEFAULT_ALPHA: float = 150. / 255.
-var hoverOpacityChangeSpeed: float = 0.03
+const DEFAULT_ALPHA: float = 200. / 255.
+var hoverOpacityChangeSpeed: float = 0.09
 
 var propData: PropData
 

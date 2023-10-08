@@ -36,9 +36,9 @@ var customers = [
 		"Heartbroken Butcher",
 		"Greetings! You know me, you buy meat at my shop. Anyway... those were better days... My gal just left me! What am I supposed to do now?!",
 		[
-			"To be honest I don't even care, just give me something that resembles the [b][i]colors of different seasons[/b][/i], when life was happier...",
-			"Hey... Now that you got the [b]colors[/b] right, could you put in some [b][i]sour stuff[/b][/i] to better match my mood?",
-			"I like the [b]color[/b], the [b]sourness[/b] is just fine, and I don't need salt, my tears are enought... Oh I see a [b][i]girls name[/b][/i] in your inventory though..."
+			"To be honest I don't even care, just give me something that resembles the [b]colors of different seasons[/b], when life was happier...",
+			"Hey... Now that you got the [b]colors[/b] right, could you put in some [b]sour stuff[/b] to better match my mood?",
+			"I like the [b]color[/b], the [b]sourness[/b] is just fine, and I don't need salt, my tears are enought... Oh I see a [b]girls name[/b] in your inventory though..."
 		],
 		[
 			"It tastes just how I feel. Awful!",

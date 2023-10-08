@@ -44,8 +44,8 @@ scale = Vector2(0.12793, 0.12793)
 texture = SubResource("CompressedTexture2D_v4cqo")
 
 [node name="CurrentSelectedProp" type="Sprite2D" parent="."]
-position = Vector2(1538, 419)
-scale = Vector2(0.276801, 0.276801)
+position = Vector2(1552, 415)
+scale = Vector2(0.300252, 0.300252)
 texture = SubResource("CompressedTexture2D_ilp77")
 
 [node name="GridContainer" type="GridContainer" parent="."]
