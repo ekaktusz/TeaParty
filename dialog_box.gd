@@ -45,7 +45,6 @@ func reset(text: String) -> void:
 	start_print_effect()
 
 func clear():
-	print("clear")
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
 	pass
 	
