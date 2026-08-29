@@ -9,8 +9,6 @@ func _process(delta):
 	pass
 
 func _on_start_button_pressed():
-	CustomerDatabase.customers = CustomerDatabase.inactiveCustomers.duplicate()
-	CustomerDatabase.inactiveCustomers.clear()
-	CustomerDatabase.currentCustomer = randi() % CustomerDatabase.customers.size()
+	CustomerDatabase.start_new_game()
 	SceneTransition.change_scene_to_file("res://scenes/menu_scene.tscn")
 	pass # Replace with function body.

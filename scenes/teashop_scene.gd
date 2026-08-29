@@ -1,8 +1,8 @@
 extends Control
 
 func check_ingredients():
-	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
-	return CustomerDatabase.getCurrentCustomer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop1.propName) or CustomerDatabase.getCurrentCustomer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop2.propName) or CustomerDatabase.getCurrentCustomer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop3.propName)
+	var cust: CustomerData = CustomerDatabase.get_current_customer()
+	return CustomerDatabase.get_current_customer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop1.propName) or CustomerDatabase.get_current_customer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop2.propName) or CustomerDatabase.get_current_customer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop3.propName)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,10 +12,10 @@ func _ready():
 var over = false
 	
 func reset():
-	if CustomerDatabase.getCurrentCustomer() == null:
+	if CustomerDatabase.get_current_customer() == null:
 		return
 	
-	$customer.load_from_data(CustomerDatabase.getCurrentCustomer())
+	$customer.load_from_data(CustomerDatabase.get_current_customer())
 	$Button2.disabled = true
 	$Button.disabled = true
 	$click_for_next.modulate.a = 0
@@ -30,21 +30,21 @@ func reset():
 		$Button2.disabled = false
 		$Button.disabled = false
 		$DialogBox.has_more = false
-		$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().get_current_order_dialog())
+		$DialogBox.set_text(CustomerDatabase.get_current_customer().get_current_order_dialog())
 		$DialogBox.tween_complete()
 	else:
 		$ing1.visible = false
 		$ing2.visible = false
 		$ing3.visible = false
 		$Button.disabled = true
-		if (not CustomerDatabase.getCurrentCustomer().introFinished):
-			#print(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
-			$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().customerStarterMessage)
+		if (not CustomerDatabase.get_current_customer().introFinished):
+			#print(CustomerDatabase.get_current_customer().customerStarterMessage)
+			$DialogBox.set_text(CustomerDatabase.get_current_customer().customerStarterMessage)
 			#print("hello")
 			#print($DialogBox.get_text())
 			$DialogBox.has_more = true
 		else:
-			$DialogBox.set_text(CustomerDatabase.getCurrentCustomer().get_current_order_dialog())
+			$DialogBox.set_text(CustomerDatabase.get_current_customer().get_current_order_dialog())
 		
 		$door_bell.play()
 		
@@ -70,20 +70,24 @@ func _process(delta):
 		show_next_customer_button()
 		
 func end_with_win():
-	CustomerDatabase.getCurrentCustomer().customerCurrentLevel += 1
-	#print (CustomerDatabase.getCurrentCustomer().customerCurrentLevel)
-	if CustomerDatabase.getCurrentCustomer().customerCurrentLevel == 3:
-		CustomerDatabase.removeCurrentCustomer()
-	if CustomerDatabase.customers.size() == 0:
+	var customer = CustomerDatabase.get_current_customer()
+	if customer == null:
+		return
+
+	customer.customerCurrentLevel += 1
+	#print (customer.customerCurrentLevel)
+	if customer.customerCurrentLevel == 3:
+		CustomerDatabase.remove_current_customer()
+	if CustomerDatabase.active_customers.is_empty():
 		#await get_tree().create_timer(2.0).timeout
 		BgNoises.stop()
 		SceneTransition.change_scene_to_file("res://scenes/ending_scene.tscn")
 	else:
-		CustomerDatabase.nextCustomer()
+		CustomerDatabase.next_customer(customer)
 	pass
 	
 func end_with_lose():
-	CustomerDatabase.nextCustomer()
+	CustomerDatabase.next_customer(CustomerDatabase.get_current_customer())
 	pass
 	
 func show_next_customer_button():
@@ -101,21 +105,21 @@ func hide_next_customer_button():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			if $DialogBox.is_complete and not CustomerDatabase.getCurrentCustomer().introFinished:
-				CustomerDatabase.getCurrentCustomer().introFinished = true
+			if $DialogBox.is_complete and not CustomerDatabase.get_current_customer().introFinished:
+				CustomerDatabase.get_current_customer().introFinished = true
 				$DialogBox.has_more = false
-				$DialogBox.reset(CustomerDatabase.getCurrentCustomer().customerOrderDialogs[0]) #ugyis csak az elsonel kell
+				$DialogBox.reset(CustomerDatabase.get_current_customer().customerOrderDialogs[0]) #ugyis csak az elsonel kell
 			if self.over and not $customer.fading and $DialogBox.is_complete:
 				on_over_this_customer()
 				hide_next_customer_button()
 
 func play_winning_dialog():
-	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
+	var cust: CustomerData = CustomerDatabase.get_current_customer()
 	$DialogBox.reset(cust.customerOrderAcceptDialogs[cust.customerCurrentLevel])
 	self.over = true
 	
 func play_losing_dialog():
-	var cust: CustomerData = CustomerDatabase.getCurrentCustomer()
+	var cust: CustomerData = CustomerDatabase.get_current_customer()
 	$DialogBox.reset(cust.customerOrderRejectionDialogs[cust.customerCurrentLevel])
 	self.over = true
 

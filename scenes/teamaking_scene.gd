@@ -173,7 +173,7 @@ func _ready():
 	$SelectedProp3.disable()
 	$SelectedProp3.notRealShit = true
 	
-	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = CustomerDatabase.getCurrentCustomer().get_current_order_dialog()
+	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = CustomerDatabase.get_current_customer().get_current_order_dialog()
 	
 	pass # Replace with function body.
 
