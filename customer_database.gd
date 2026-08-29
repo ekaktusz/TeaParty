@@ -1,12 +1,12 @@
 extends Node
 
-var player_current_level: int = 0 # only grow if all characthers reached the next level
+var _player_current_level: int = 0 # only grow if all characthers reached the next level
 
-var inactive_customers: Array[CustomerData] = []
-var active_customers: Array[CustomerData] = []
-var current_customer_id: int = 0
+var _inactive_customers: Array[CustomerData] = []
+var _active_customers: Array[CustomerData] = []
+var _current_customer_id: int = 0
 
-var customers: Array[CustomerData] = [
+var _customers: Array[CustomerData] = [
 	CustomerData.new(
 		"Grumpy Lumberjack",
 		"Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity...",
@@ -158,72 +158,93 @@ var customers: Array[CustomerData] = [
 		]
 	)
 ]
-
 func _ready() -> void:
-	start_new_game(false)
+	reset_customer_progress()
 
-func start_new_game(reset_selected_ingredients: bool = true) -> void:
-	player_current_level = 0
-	inactive_customers.clear()
-	active_customers = customers.duplicate()
-	for customer in active_customers:
+func reset_customer_progress() -> void:
+	_player_current_level = 0
+	_inactive_customers.clear()
+	_active_customers = _customers.duplicate()
+	# duplicate just duplicates references, so need to reset for each customer data
+	for customer in _active_customers:
 		customer.reset()
-	if reset_selected_ingredients:
-		SelectedIngredient.reset()
-	current_customer_id = 0 if active_customers.is_empty() else randi() % active_customers.size()
+
+	# _active_customers should not be empty, just safety
+	_current_customer_id = 0 if _active_customers.is_empty() else randi() % _active_customers.size()
+
 
 func get_current_customer() -> CustomerData:
-	if active_customers.is_empty():
+	if _active_customers.is_empty():
 		return null
-	if current_customer_id < 0 or current_customer_id >= active_customers.size():
-		current_customer_id = 0
-	return active_customers[current_customer_id]
+	return _active_customers[_current_customer_id]
+
+
+func has_active_customers() -> bool:
+	return not _active_customers.is_empty()
+
 
 func remove_current_customer() -> CustomerData:
-	var current_customer = self.get_current_customer()
-	if current_customer == null:
+	var customer = get_current_customer()
+	if customer == null:
 		return null
 
-	current_customer.reset()
-	inactive_customers.append(current_customer)
-	active_customers.remove_at(current_customer_id)
-	current_customer_id = 0
-	return current_customer
+	customer.reset()
+	_inactive_customers.append(customer)
+	_active_customers.remove_at(_current_customer_id)
+	_current_customer_id = 0
+	return customer
+
 	
 func next_customer(excluded_customer: CustomerData = null) -> void:
-	if active_customers.is_empty():
-		current_customer_id = 0
+	if _active_customers.is_empty():
+		_current_customer_id = 0
 		return
 
-	var customers_on_this_level: Array[CustomerData] = get_all_characthers_on_this_level()
-	if customers_on_this_level.is_empty():
-		var lowest_remaining_level = active_customers[0].customerCurrentLevel
-		for customer in active_customers:
-			lowest_remaining_level = min(lowest_remaining_level, customer.customerCurrentLevel)
-		player_current_level = lowest_remaining_level
-		customers_on_this_level = get_all_characthers_on_this_level()
-
-	if customers_on_this_level.is_empty():
-		current_customer_id = 0
+	var eligible_customers := _get_next_level_customers()
+	if eligible_customers.is_empty():
+		_current_customer_id = 0
 		return
 
-	var candidates: Array[CustomerData] = customers_on_this_level.duplicate()
+	_current_customer_id = _choose_customer_id(eligible_customers, excluded_customer)
+
+# Internal helpers
+
+func _get_next_level_customers() -> Array[CustomerData]:
+	var eligible_customers: Array[CustomerData] = _get_customers_at_current_level()
+	if eligible_customers.is_empty():
+		_player_current_level = _get_lowest_remaining_level()
+		eligible_customers = _get_customers_at_current_level()
+	return eligible_customers
+
+func _get_customers_at_current_level() -> Array[CustomerData]:
+	var customers_at_current_level: Array[CustomerData] = []
+	for customer in _active_customers:
+		if customer.customerCurrentLevel == _player_current_level:
+			customers_at_current_level.append(customer)
+	return customers_at_current_level
+
+func _get_lowest_remaining_level() -> int:
+	var lowest_level: int = _active_customers[0].customerCurrentLevel
+	for customer in _active_customers:
+		lowest_level = min(lowest_level, customer.customerCurrentLevel)
+	return lowest_level
+
+func _choose_customer_id(
+	eligible_customers: Array[CustomerData],
+	excluded_customer: CustomerData
+) -> int:
+	var candidates: Array[CustomerData] = eligible_customers.duplicate()
 	if excluded_customer != null and candidates.size() > 1:
 		candidates.erase(excluded_customer)
 
-	var selected_customer: CustomerData = candidates[randi() % candidates.size()]
-	current_customer_id = get_id_for_customer(selected_customer)
+	var selected_customer: CustomerData = candidates.pick_random()
+	return _get_id_for_customer(selected_customer)
 
-func get_all_characthers_on_this_level() -> Array[CustomerData]:
-	var all_customer_on_this_level: Array[CustomerData] = []
-	for customer in active_customers:
-		if customer.customerCurrentLevel == player_current_level:
-			all_customer_on_this_level.append(customer)
-	return all_customer_on_this_level
-	
-func get_id_for_customer(customer_data: CustomerData) -> int:
-	for i in active_customers.size():
-		var customer = active_customers[i]
+func _get_id_for_customer(customer_data: CustomerData) -> int:
+	for i in _active_customers.size():
+		var customer = _active_customers[i]
 		if customer == customer_data:
 			return i
+
+	assert(false, "selected customer is not active")
 	return -1

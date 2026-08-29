@@ -6,7 +6,7 @@ func check_ingredients():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#print(CustomerDatabase.customers.size())
+	#print(CustomerDatabase.has_active_customers())
 	reset()
 	
 var over = false
@@ -78,7 +78,7 @@ func end_with_win():
 	#print (customer.customerCurrentLevel)
 	if customer.customerCurrentLevel == 3:
 		CustomerDatabase.remove_current_customer()
-	if CustomerDatabase.active_customers.is_empty():
+	if not CustomerDatabase.has_active_customers():
 		#await get_tree().create_timer(2.0).timeout
 		BgNoises.stop()
 		SceneTransition.change_scene_to_file("res://scenes/ending_scene.tscn")
