@@ -194,7 +194,18 @@ func remove_current_customer() -> CustomerData:
 	_current_customer_id = 0
 	return customer
 
-	
+func get_revealed_clue_sets() -> Array:
+	var customer = get_current_customer()
+	if customer == null:
+		return []
+
+	var revealed_clues = []
+	for index in range(0, customer.customerCurrentLevel + 1):
+		if index >= customer.correctItems.size():
+			break
+		revealed_clues.append(customer.correctItems[index])
+	return revealed_clues
+
 func next_customer(excluded_customer: CustomerData = null) -> void:
 	if _active_customers.is_empty():
 		_current_customer_id = 0

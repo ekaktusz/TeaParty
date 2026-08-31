@@ -2,7 +2,22 @@ extends Control
 
 func check_ingredients():
 	var cust: CustomerData = CustomerDatabase.get_current_customer()
-	return CustomerDatabase.get_current_customer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop1.propName) or CustomerDatabase.get_current_customer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop2.propName) or CustomerDatabase.get_current_customer().correctItems[cust.customerCurrentLevel].has(SelectedIngredient.prop3.propName)
+	if cust == null:
+		return false
+
+	var selected = SelectedIngredient.get_names()
+	if not SelectedIngredient.has_three_distinct_entries():
+		return false
+
+	for clue_set in CustomerDatabase.get_revealed_clue_sets():
+		var matched = false
+		for ingredient_name in selected:
+			if clue_set.has(ingredient_name):
+				matched = true
+				break
+		if not matched:
+			return false
+	return true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
