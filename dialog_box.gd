@@ -2,6 +2,7 @@ extends Control
 
 var is_complete: bool = false
 var has_more: bool = true
+var text_tween: Tween
 
 const DEFAULT_BACKGROUND_COLOR := Color(0.92549, 0.796078, 0.619608, 1)
 const ACCEPT_BACKGROUND_COLOR := Color(0.78, 0.92, 0.78, 1)
@@ -15,9 +16,19 @@ func start_print_effect():
 	#print("start_print_effect")
 	self.is_complete = false
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
-	var tween = get_tree().create_tween()
-	tween.tween_property($MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel, "visible_ratio", 1, 2)
-	tween.tween_callback(self.tween_complete)
+	if text_tween != null:
+		text_tween.kill()
+	text_tween = get_tree().create_tween()
+	text_tween.tween_property($MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel, "visible_ratio", 1, 2)
+	text_tween.tween_callback(self.tween_complete)
+
+func reveal_text() -> void:
+	if is_complete:
+		return
+	if text_tween != null:
+		text_tween.kill()
+	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 1
+	tween_complete()
 	
 func _process(delta):
 	#print($MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio)

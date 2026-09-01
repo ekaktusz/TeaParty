@@ -1,5 +1,8 @@
 extends Control
 
+const DOUBLE_CLICK_INTERVAL_MS := 400
+var last_dialog_click_time := -DOUBLE_CLICK_INTERVAL_MS
+
 func check_ingredients():
 	var cust: CustomerData = CustomerDatabase.get_current_customer()
 	if cust == null:
@@ -119,7 +122,14 @@ func hide_next_customer_button():
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.pressed:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			if not $DialogBox.is_complete:
+				var current_time := Time.get_ticks_msec()
+				var is_double_click: bool = event.double_click or current_time - last_dialog_click_time <= DOUBLE_CLICK_INTERVAL_MS
+				last_dialog_click_time = current_time
+				if is_double_click:
+					$DialogBox.reveal_text()
+					return
 			if $DialogBox.is_complete and not CustomerDatabase.get_current_customer().introFinished:
 				CustomerDatabase.get_current_customer().introFinished = true
 				$DialogBox.has_more = false
