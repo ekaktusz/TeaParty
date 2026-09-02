@@ -28,6 +28,7 @@ func _ready():
 	reset()
 	
 var over = false
+var customer_transition_in_progress := false
 	
 func reset():
 	if CustomerDatabase.get_current_customer() == null:
@@ -69,6 +70,9 @@ func reset():
 	$customer.fade_in()
 
 func on_over_this_customer():
+	if customer_transition_in_progress:
+		return
+	customer_transition_in_progress = true
 	$customer.fade_out()
 	await get_tree().create_timer(1.0).timeout
 	$DialogBox.clear()
@@ -79,9 +83,10 @@ func on_over_this_customer():
 	SelectedIngredient.reset()
 	self.over = false
 	reset()
+	customer_transition_in_progress = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if $DialogBox.is_complete and not $DialogBox.has_more and not self.over and not $customer.fading:
 		$Button.disabled = false
 	if self.over and not $customer.fading and $DialogBox.is_complete and $click_for_next.modulate.a == 0:
@@ -123,6 +128,8 @@ func hide_next_customer_button():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			if SceneTransition.is_transitioning or customer_transition_in_progress or $customer.fading:
+				return
 			if not $DialogBox.is_complete:
 				var current_time := Time.get_ticks_msec()
 				var is_double_click: bool = event.double_click or current_time - last_dialog_click_time <= DOUBLE_CLICK_INTERVAL_MS
@@ -151,6 +158,8 @@ func play_losing_dialog():
 	self.over = true
 
 func _on_button_serve_pressed():
+	if customer_transition_in_progress or SceneTransition.is_transitioning or $customer.fading:
+		return
 	if check_ingredients():
 		$sip_accept.play()
 		play_winning_dialog()
@@ -166,5 +175,7 @@ func _on_button_serve_pressed():
 	pass # Replace with function body.
 
 func _on_button_select_ing_pressed():
+	if customer_transition_in_progress or SceneTransition.is_transitioning or $customer.fading:
+		return
 	SceneTransition.change_scene_to_file("res://scenes/teamaking_scene.tscn")
 	pass # Replace with function body.

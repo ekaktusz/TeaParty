@@ -14,10 +14,11 @@ func _ready():
 	
 func start_print_effect():
 	#print("start_print_effect")
-	self.is_complete = false
-	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
 	if text_tween != null:
 		text_tween.kill()
+		text_tween = null
+	self.is_complete = false
+	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
 	text_tween = get_tree().create_tween()
 	text_tween.tween_property($MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel, "visible_ratio", 1, 2)
 	text_tween.tween_callback(self.tween_complete)
@@ -27,6 +28,7 @@ func reveal_text() -> void:
 		return
 	if text_tween != null:
 		text_tween.kill()
+		text_tween = null
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 1
 	tween_complete()
 	
@@ -38,6 +40,9 @@ func _process(delta):
 func set_text(text: String):
 	#print("set_text")
 	#print(text)
+	if text_tween != null:
+		text_tween.kill()
+		text_tween = null
 	self.is_complete = false
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = text
 	set_neutral()
@@ -66,6 +71,9 @@ func tween_complete():
 func reset(text: String) -> void:
 	#print("reset")
 	#print(text)
+	if text_tween != null:
+		text_tween.kill()
+		text_tween = null
 	set_neutral()
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
 	$Button.visible = false
@@ -74,6 +82,10 @@ func reset(text: String) -> void:
 	start_print_effect()
 
 func clear():
+	if text_tween != null:
+		text_tween.kill()
+		text_tween = null
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
+	self.is_complete = false
 	pass
 	
