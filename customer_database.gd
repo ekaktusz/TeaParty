@@ -152,9 +152,9 @@ var _customers: Array[CustomerData] = [
 		],
 		"res://images/characthers/CozyJam2023_punk.png",
 		[
-			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whiskey", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"],
-			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whiskey", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"],
-			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whiskey", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"]
+			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whisky", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"],
+			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whisky", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"],
+			["Chili", "Ginger", "Honey", "Maple Syrup", "Chamomile", "Herbal Tea", "Vanilla", "Chocolate", "Cinnamon", "Nutmeg", "Dried Fruits", "Orange Peels", "Unicorn Feather", "Water of Life", "Lizard Liver", "Poppy Seed", "Frogleg", "Roiboss", "Black Tea", "Mate Tea", "Bergamot", "Cloves", "Milk", "Whisky", "Green Tea", "White Tea", "Lemon", "Vinegar", "Rose Petal", "Jasmine Petal"]
 		]
 	)
 ]

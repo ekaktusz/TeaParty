@@ -140,13 +140,13 @@ func _input(event):
 
 func play_winning_dialog():
 	var cust: CustomerData = CustomerDatabase.get_current_customer()
-	$DialogBox.reset(cust.customerOrderAcceptDialogs[cust.customerCurrentLevel] + " 😄")
+	$DialogBox.reset(cust.customerOrderAcceptDialogs[cust.customerCurrentLevel])
 	$DialogBox.set_feedback(true)
 	self.over = true
 	
 func play_losing_dialog():
 	var cust: CustomerData = CustomerDatabase.get_current_customer()
-	$DialogBox.reset(cust.customerOrderRejectionDialogs[cust.customerCurrentLevel] + " 😠")
+	$DialogBox.reset(cust.customerOrderRejectionDialogs[cust.customerCurrentLevel])
 	$DialogBox.set_feedback(false)
 	self.over = true
 
