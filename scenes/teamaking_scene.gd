@@ -6,7 +6,7 @@ var inventory = [
 	""
 ]
 
-var props = [
+var props: Array[PropData] = [
 	PropData.new(
 		"Bergamot",
 		"res://images/props/bergamot.png",
@@ -184,7 +184,7 @@ func return_prop(propData: PropData):
 			prop.enable()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	$Button.disabled = can_select()
 	pass
 	

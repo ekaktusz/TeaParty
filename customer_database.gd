@@ -6,6 +6,23 @@ var _inactive_customers: Array[CustomerData] = []
 var _active_customers: Array[CustomerData] = []
 var _current_customer_id: int = 0
 
+func _clone_customer_templates() -> Array[CustomerData]:
+	var cloned: Array[CustomerData] = []
+	for customer in _customers:
+		var copy := CustomerData.new(
+			customer.customerName,
+			customer.customerStarterMessage,
+			customer.customerOrderDialogs.duplicate(true),
+			customer.customerOrderRejectionDialogs.duplicate(true),
+			customer.customerOrderAcceptDialogs.duplicate(true),
+			customer.customerImage,
+			customer.correctItems.duplicate(true)
+		)
+		copy.customerCurrentLevel = customer.customerCurrentLevel
+		copy.introFinished = customer.introFinished
+		cloned.append(copy)
+	return cloned
+
 var _customers: Array[CustomerData] = [
 	CustomerData.new(
 		"Grumpy Lumberjack",
@@ -164,8 +181,7 @@ func _ready() -> void:
 func reset_customer_progress() -> void:
 	_player_current_level = 0
 	_inactive_customers.clear()
-	_active_customers = _customers.duplicate()
-	# duplicate just duplicates references, so need to reset for each customer data
+	_active_customers = _clone_customer_templates()
 	for customer in _active_customers:
 		customer.reset()
 
