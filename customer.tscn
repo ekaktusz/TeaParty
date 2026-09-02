@@ -11,3 +11,4 @@ position = Vector2(-4, 3)
 scale = Vector2(0.502, 0.489904)
 texture = ExtResource("1_53fq3")
 centered = false
+flip_h = true
