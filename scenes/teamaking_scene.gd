@@ -161,10 +161,14 @@ var props: Array[PropData] = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for item in self.props:
-		var prop = PropMenu.instantiate()
-		prop.load(item)
-		$GridContainer.add_child(prop)
+	for ingredient_name in _unlock_database().get_unlocked_names_in_order():
+		for item in self.props:
+			if item.propName != ingredient_name:
+				continue
+			var prop = PropMenu.instantiate()
+			prop.load(item)
+			$GridContainer.add_child(prop)
+			break
 		
 	$SelectedProp1.disable()
 	$SelectedProp1.notRealShit = true
@@ -174,7 +178,6 @@ func _ready():
 	$SelectedProp3.notRealShit = true
 	
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = CustomerDatabase.get_current_customer().get_current_order_dialog()
-	
 	pass # Replace with function body.
 
 func return_prop(propData: PropData):
@@ -205,6 +208,63 @@ func select_prop(propData: PropData):
 		$SelectedProp3.enable()
 		return
 
+func _show_unlock_choice() -> void:
+	$GridContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var overlay := ColorRect.new()
+	overlay.name = "UnlockChoiceOverlay"
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.color = Color(0.05, 0.03, 0.02, 0.68)
+	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	add_child(overlay)
+	var panel := Panel.new()
+	panel.position = Vector2(510, 270)
+	panel.size = Vector2(900, 430)
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.92549, 0.796078, 0.619608, 1)
+	style.corner_radius_top_left = 20
+	style.corner_radius_top_right = 20
+	style.corner_radius_bottom_left = 20
+	style.corner_radius_bottom_right = 20
+	panel.add_theme_stylebox_override("panel", style)
+	overlay.add_child(panel)
+	var title := Label.new()
+	title.text = "Choose a new ingredient"
+	title.position = Vector2(40, 25)
+	title.size = Vector2(820, 60)
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_override("font", preload("res://fonts/Laila-Bold.ttf"))
+	title.add_theme_font_size_override("font_size", 34)
+	title.add_theme_color_override("font_color", Color(0.27, 0.20, 0.10))
+	panel.add_child(title)
+	var options: Array[String] = _unlock_database().get_pending_options()
+	for i in 2:
+		var option_button := Button.new()
+		option_button.position = Vector2(70 + i * 400, 115)
+		option_button.size = Vector2(330, 260)
+		option_button.text = options[i]
+		option_button.icon = _get_prop_icon(options[i])
+		option_button.expand_icon = true
+		option_button.add_theme_font_override("font", preload("res://fonts/Laila-Bold.ttf"))
+		option_button.add_theme_font_size_override("font_size", 26)
+		option_button.pressed.connect(_on_unlock_option_pressed.bind(options[i], overlay))
+		panel.add_child(option_button)
+
+func _get_prop_icon(prop_name: String) -> Texture2D:
+	for item in props:
+		if item.propName == prop_name:
+			return load(item.propIconPath)
+	return null
+
+func _on_unlock_option_pressed(prop_name: String, overlay: Control) -> void:
+	_unlock_database().choose(prop_name)
+	overlay.queue_free()
+	$GridContainer.mouse_filter = Control.MOUSE_FILTER_PASS
+	for prop in $GridContainer.get_children():
+		if _unlock_database().is_unlocked(prop.propData.propName):
+			prop.enable()
+
+func _unlock_database() -> Node:
+	return get_node("/root/UnlockDatabase")
 func _on_selec_button_pressed():
 	SteamSound.play()
 	SceneTransition.change_scene_to_file("res://scenes/teashop_scene.tscn")

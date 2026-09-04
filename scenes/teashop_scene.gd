@@ -29,6 +29,7 @@ func _ready():
 	
 var over = false
 var customer_transition_in_progress := false
+var waiting_for_unlock_choice := false
 	
 func reset():
 	if CustomerDatabase.get_current_customer() == null:
@@ -76,7 +77,14 @@ func on_over_this_customer():
 	$customer.fade_out()
 	await get_tree().create_timer(1.0).timeout
 	$DialogBox.clear()
-	if check_ingredients():
+	var successful: bool = check_ingredients()
+	if successful and get_node("/root/UnlockDatabase").has_pending_choice():
+		_show_unlock_choice(successful)
+		return
+	_finish_customer_transition(successful)
+
+func _finish_customer_transition(successful: bool) -> void:
+	if successful:
 		end_with_win()
 	else:
 		end_with_lose()
@@ -84,6 +92,101 @@ func on_over_this_customer():
 	self.over = false
 	reset()
 	customer_transition_in_progress = false
+	waiting_for_unlock_choice = false
+
+func _show_unlock_choice(successful: bool) -> void:
+	waiting_for_unlock_choice = true
+	var overlay := ColorRect.new()
+	overlay.name = "UnlockChoiceOverlay"
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.color = Color(0.05, 0.03, 0.02, 0.68)
+	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	add_child(overlay)
+	var panel := Panel.new()
+	panel.position = Vector2(510, 245)
+	panel.size = Vector2(900, 500)
+	var panel_style := StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.92549, 0.796078, 0.619608, 1)
+	panel_style.corner_radius_top_left = 20
+	panel_style.corner_radius_top_right = 20
+	panel_style.corner_radius_bottom_left = 20
+	panel_style.corner_radius_bottom_right = 20
+	panel.add_theme_stylebox_override("panel", panel_style)
+	overlay.add_child(panel)
+	var title := Label.new()
+	title.text = "A new ingredient is ready to unlock!"
+	title.position = Vector2(35, 25)
+	title.size = Vector2(830, 55)
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_override("font", preload("res://fonts/Laila-Bold.ttf"))
+	title.add_theme_font_size_override("font_size", 32)
+	title.add_theme_color_override("font_color", Color(0.27, 0.20, 0.10))
+	panel.add_child(title)
+	var subtitle := Label.new()
+	subtitle.text = "Choose one ingredient to add to your collection."
+	subtitle.position = Vector2(35, 78)
+	subtitle.size = Vector2(830, 40)
+	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	subtitle.add_theme_font_override("font", preload("res://fonts/Laila-Regular.ttf"))
+	subtitle.add_theme_font_size_override("font_size", 22)
+	subtitle.add_theme_color_override("font_color", Color(0.27, 0.20, 0.10))
+	panel.add_child(subtitle)
+	var options: Array[String] = get_node("/root/UnlockDatabase").get_pending_options()
+	for i in 2:
+		var choice := VBoxContainer.new()
+		choice.position = Vector2(70 + i * 400, 140)
+		choice.size = Vector2(330, 285)
+		choice.alignment = BoxContainer.ALIGNMENT_CENTER
+		choice.add_theme_constant_override("separation", 8)
+		var icon_button := TextureButton.new()
+		icon_button.custom_minimum_size = Vector2(210, 210)
+		icon_button.texture_normal = _get_unlock_prop_icon(options[i])
+		icon_button.ignore_texture_size = true
+		icon_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+		icon_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		icon_button.pivot_offset = Vector2(105, 105)
+		icon_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		icon_button.mouse_entered.connect(_on_unlock_icon_hover.bind(icon_button, true))
+		icon_button.mouse_exited.connect(_on_unlock_icon_hover.bind(icon_button, false))
+		icon_button.pressed.connect(_on_unlock_option_pressed.bind(options[i], overlay, successful))
+		choice.add_child(icon_button)
+		var name_label := Label.new()
+		name_label.text = options[i]
+		name_label.custom_minimum_size = Vector2(330, 45)
+		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		name_label.add_theme_font_override("font", preload("res://fonts/Laila-Bold.ttf"))
+		name_label.add_theme_font_size_override("font_size", 26)
+		name_label.add_theme_color_override("font_color", Color(0.27, 0.20, 0.10))
+		choice.add_child(name_label)
+		panel.add_child(choice)
+
+func _on_unlock_icon_hover(icon_button: TextureButton, hovered: bool) -> void:
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.set_parallel(true)
+	tween.tween_property(icon_button, "scale", Vector2(1.08, 1.08) if hovered else Vector2.ONE, 0.12)
+	tween.tween_property(icon_button, "modulate", Color(1.18, 1.18, 1.18, 1.0) if hovered else Color.WHITE, 0.12)
+
+func _get_unlock_prop_icon(prop_name: String) -> Texture2D:
+	# Use the same ingredient definitions as the tea-making scene.
+	var icon_map := {
+		"Cinnamon": "res://images/props/cinnamon.png", "Lizard Liver": "res://images/props/lizard_liver.png",
+		"Poppy Seed": "res://images/props/poppy_seed.png", "Honey": "res://images/props/honey.png",
+		"Vinegar": "res://images/props/vinegar.png", "Unicorn Feather": "res://images/props/unicorn_feather.png",
+		"Jasmine Petal": "res://images/props/jasmine.png", "Whisky": "res://images/props/whisky.png",
+		"Vanilla": "res://images/props/vanilla.png", "Chili": "res://images/props/chili.png",
+		"Chocolate": "res://images/props/chocolate.png", "Herbal Tea": "res://images/props/herbaltea.png",
+		"Water of Life": "res://images/props/water_of_life.png", "Cloves": "res://images/props/cloves.png",
+		"Ginger": "res://images/props/ginger.png", "Orange Peels": "res://images/props/orange_peel.png",
+		"Rose Petal": "res://images/props/rose.png", "Mate Tea": "res://images/props/matetea.png",
+		"White Tea": "res://images/props/whitetea.png", "Roiboss": "res://images/props/roiboss.png"
+	}
+	return load(icon_map.get(prop_name, ""))
+
+func _on_unlock_option_pressed(prop_name: String, overlay: Control, successful: bool) -> void:
+	get_node("/root/UnlockDatabase").choose(prop_name)
+	overlay.queue_free()
+	_finish_customer_transition(successful)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -170,6 +273,7 @@ func _on_button_serve_pressed():
 	var successful: bool = check_ingredients()
 	_record_tea_attempt(successful)
 	if successful:
+		get_node("/root/UnlockDatabase").register_correct_round()
 		$sip_accept.play()
 		play_winning_dialog()
 	else:
