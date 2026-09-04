@@ -78,7 +78,7 @@ size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_lwhho")
 theme_override_font_sizes/font_size = 30
-text = "Gerappa Games 2023"
+text = "Gerappa Games 2026"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/StartButton" to="." method="_on_start_button_pressed"]
