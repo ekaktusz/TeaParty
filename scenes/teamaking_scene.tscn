@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6wbbmre8kjp1"]
+[gd_scene load_steps=17 format=3 uid="uid://b6wbbmre8kjp1"]
 
 [ext_resource type="Script" path="res://scenes/teamaking_scene.gd" id="1_7obi3"]
 [ext_resource type="Texture2D" uid="uid://k8ogg2sqqx61" path="res://images/backgrounds/teamaking-background.png" id="1_887p3"]
@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://c2h07jn3xr6tq" path="res://fonts/Laila-Regular.ttf" id="10_0u0xr"]
 [ext_resource type="FontFile" uid="uid://ca0tcyh4ap0eh" path="res://fonts/Laila-Light.ttf" id="11_af7rs"]
 [ext_resource type="FontFile" uid="uid://i88p16kmb6bn" path="res://fonts/Laila-SemiBold.ttf" id="12_klwbg"]
+[ext_resource type="PackedScene" path="res://notebook_overlay.tscn" id="13_notebook"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4cqo"]
 
@@ -137,5 +138,7 @@ theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/mono_font_size = 30
 bbcode_enabled = true
 text = "Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity..."
+
+[node name="NotebookOverlay" parent="." instance=ExtResource("13_notebook")]
 
 [connection signal="pressed" from="Button" to="." method="_on_selec_button_pressed"]

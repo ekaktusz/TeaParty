@@ -9,6 +9,7 @@ class_name CustomerData extends Resource
 @export var customer_image: String = ""
 @export var intro_finished: bool = false
 @export var correct_items: Array = []
+var tea_history: Array[Dictionary] = []
 
 var customerName: String:
 	get:
@@ -78,6 +79,13 @@ func _init(name: String = "", starter: String = "", order_dialogs: Array = [], r
 func reset():
 	customer_current_level = 0
 	intro_finished = false
+	tea_history.clear()
+
+func add_tea_history(ingredient_icon_paths: Array[String], successful: bool) -> void:
+	tea_history.append({
+		"ingredients": ingredient_icon_paths.duplicate(),
+		"successful": successful
+	})
 
 func get_current_order_dialog():
 	return customer_order_dialogs[customer_current_level]
@@ -87,4 +95,3 @@ func get_current_accept_dialog():
 
 func get_current_reject_dialog():
 	return customer_order_rejection_dialogs[customer_current_level]
-

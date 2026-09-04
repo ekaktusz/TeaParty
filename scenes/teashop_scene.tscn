@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://4a60ot8exgno"]
+[gd_scene load_steps=16 format=3 uid="uid://4a60ot8exgno"]
 
 [ext_resource type="Texture2D" uid="uid://cptw1l2k3a5t2" path="res://images/backgrounds/teashop-background.png" id="1_sr4s6"]
 [ext_resource type="Script" path="res://scenes/teashop_scene.gd" id="1_uiaff"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://d38sr7103g0gu" path="res://sfx/sip.wav" id="11_6jiad"]
 [ext_resource type="AudioStream" uid="uid://q8wyh5en3ovw" path="res://sfx/sip_no.wav" id="12_nmoub"]
 [ext_resource type="AudioStream" uid="uid://inawl3fqyjyk" path="res://sfx/door_bell.wav" id="13_3iyq4"]
+[ext_resource type="PackedScene" path="res://notebook_overlay.tscn" id="14_notebook"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m6fwx"]
 load_path = "res://.godot/imported/bergamot.png-742a03ed342a142b76b691cdbc504560.ctex"
@@ -139,6 +140,8 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_c58nw")
 theme_override_font_sizes/font_size = 60
 text = "Click for next customer!"
+
+[node name="NotebookOverlay" parent="." instance=ExtResource("14_notebook")]
 
 [connection signal="pressed" from="Button" to="." method="_on_button_select_ing_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_serve_pressed"]

@@ -204,7 +204,6 @@ func remove_current_customer() -> CustomerData:
 	if customer == null:
 		return null
 
-	customer.reset()
 	_inactive_customers.append(customer)
 	_active_customers.remove_at(_current_customer_id)
 	_current_customer_id = 0

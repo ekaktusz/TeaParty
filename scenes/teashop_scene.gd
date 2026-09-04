@@ -128,6 +128,13 @@ func hide_next_customer_button():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			# The notebook is a modal overlay only while it is open. The toggle
+			# button itself must not advance the customer's dialogue.
+			if $NotebookOverlay.is_open:
+				return
+			var mouse_position: Vector2 = event.position
+			if Rect2(28, 24, 190, 62).has_point(mouse_position):
+				return
 			if SceneTransition.is_transitioning or customer_transition_in_progress or $customer.fading:
 				return
 			if not $DialogBox.is_complete:
@@ -160,7 +167,9 @@ func play_losing_dialog():
 func _on_button_serve_pressed():
 	if customer_transition_in_progress or SceneTransition.is_transitioning or $customer.fading:
 		return
-	if check_ingredients():
+	var successful: bool = check_ingredients()
+	_record_tea_attempt(successful)
+	if successful:
 		$sip_accept.play()
 		play_winning_dialog()
 	else:
@@ -173,6 +182,18 @@ func _on_button_serve_pressed():
 	$ing3.visible = false
 	
 	pass # Replace with function body.
+
+func _record_tea_attempt(successful: bool) -> void:
+	var customer_data := CustomerDatabase.get_current_customer()
+	if customer_data == null or not SelectedIngredient.is_valid():
+		return
+	var icon_paths: Array[String] = [
+		SelectedIngredient.prop1.propIconPath,
+		SelectedIngredient.prop2.propIconPath,
+		SelectedIngredient.prop3.propIconPath
+	]
+	customer_data.add_tea_history(icon_paths, successful)
+	$NotebookOverlay.refresh()
 
 func _on_button_select_ing_pressed():
 	if customer_transition_in_progress or SceneTransition.is_transitioning or $customer.fading:
