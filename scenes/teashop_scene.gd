@@ -102,9 +102,20 @@ func _show_unlock_choice(successful: bool) -> void:
 	overlay.color = Color(0.05, 0.03, 0.02, 0.68)
 	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(overlay)
+	var outer_panel := Panel.new()
+	outer_panel.position = Vector2(510, 245)
+	outer_panel.size = Vector2(900, 500)
+	var outer_style := StyleBoxFlat.new()
+	outer_style.bg_color = Color(0, 0, 0, 1)
+	outer_style.corner_radius_top_left = 20
+	outer_style.corner_radius_top_right = 20
+	outer_style.corner_radius_bottom_left = 20
+	outer_style.corner_radius_bottom_right = 20
+	outer_panel.add_theme_stylebox_override("panel", outer_style)
+	overlay.add_child(outer_panel)
 	var panel := Panel.new()
-	panel.position = Vector2(510, 245)
-	panel.size = Vector2(900, 500)
+	panel.position = Vector2(5, 5)
+	panel.size = Vector2(890, 490)
 	var panel_style := StyleBoxFlat.new()
 	panel_style.bg_color = Color(0.92549, 0.796078, 0.619608, 1)
 	panel_style.corner_radius_top_left = 20
@@ -112,7 +123,7 @@ func _show_unlock_choice(successful: bool) -> void:
 	panel_style.corner_radius_bottom_left = 20
 	panel_style.corner_radius_bottom_right = 20
 	panel.add_theme_stylebox_override("panel", panel_style)
-	overlay.add_child(panel)
+	outer_panel.add_child(panel)
 	var title := Label.new()
 	title.text = "A new ingredient is ready to unlock!"
 	title.position = Vector2(35, 25)
