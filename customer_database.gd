@@ -186,7 +186,7 @@ func reset_customer_progress() -> void:
 		customer.reset()
 
 	# _active_customers should not be empty, just safety
-	_current_customer_id = 0 if _active_customers.is_empty() else randi() % _active_customers.size()
+	_current_customer_id = 0
 
 
 func get_current_customer() -> CustomerData:
@@ -227,6 +227,10 @@ func next_customer(excluded_customer: CustomerData = null) -> void:
 		return
 
 	var eligible_customers := _get_next_level_customers()
+	if eligible_customers.is_empty():
+		_player_current_level = _get_lowest_remaining_level()
+		eligible_customers = _get_customers_at_current_level()
+
 	if eligible_customers.is_empty():
 		_current_customer_id = 0
 		return
