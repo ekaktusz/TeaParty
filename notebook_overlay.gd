@@ -19,6 +19,7 @@ var _dimmer: ColorRect
 var _tween: Tween
 
 func _ready() -> void:
+	add_to_group("notebook_overlay")
 	_build_interface()
 	refresh()
 
@@ -107,6 +108,9 @@ func toggle() -> void:
 	is_open = not is_open
 	if is_open:
 		refresh()
+		var preview := get_parent().get_node_or_null("CurrentSelectedProp")
+		if preview != null:
+			preview.texture = null
 		_dimmer.mouse_filter = Control.MOUSE_FILTER_STOP
 		_toggle_button.text = "Close notes"
 	else:

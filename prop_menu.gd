@@ -44,6 +44,9 @@ func _process(delta):
 	pass
 	
 func _input(event):
+	for overlay in get_tree().get_nodes_in_group("notebook_overlay"):
+		if overlay.is_open:
+			return
 	if disabled:
 		return
 	

@@ -132,6 +132,14 @@ func _show_unlock_choice(successful: bool) -> void:
 	subtitle.add_theme_color_override("font_color", Color(0.27, 0.20, 0.10))
 	panel.add_child(subtitle)
 	var options: Array[String] = get_node("/root/UnlockDatabase").get_pending_options()
+	var unlock_preview := TextureRect.new()
+	unlock_preview.position = Vector2(1430, 250)
+	unlock_preview.size = Vector2(320, 430)
+	unlock_preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	unlock_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	unlock_preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	unlock_preview.visible = false
+	overlay.add_child(unlock_preview)
 	for i in 2:
 		var choice := VBoxContainer.new()
 		choice.position = Vector2(70 + i * 400, 140)
@@ -148,6 +156,8 @@ func _show_unlock_choice(successful: bool) -> void:
 		icon_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		icon_button.mouse_entered.connect(_on_unlock_icon_hover.bind(icon_button, true))
 		icon_button.mouse_exited.connect(_on_unlock_icon_hover.bind(icon_button, false))
+		icon_button.mouse_entered.connect(_on_unlock_preview_hover.bind(unlock_preview, _get_unlock_prop_card(options[i]), true))
+		icon_button.mouse_exited.connect(_on_unlock_preview_hover.bind(unlock_preview, "", false))
 		icon_button.pressed.connect(_on_unlock_option_pressed.bind(options[i], overlay, successful))
 		choice.add_child(icon_button)
 		var name_label := Label.new()
@@ -167,6 +177,13 @@ func _on_unlock_icon_hover(icon_button: TextureButton, hovered: bool) -> void:
 	tween.tween_property(icon_button, "scale", Vector2(1.08, 1.08) if hovered else Vector2.ONE, 0.12)
 	tween.tween_property(icon_button, "modulate", Color(1.18, 1.18, 1.18, 1.0) if hovered else Color.WHITE, 0.12)
 
+func _on_unlock_preview_hover(preview: TextureRect, card_path: String, hovered: bool) -> void:
+	if hovered:
+		preview.texture = load(card_path)
+		preview.visible = true
+	else:
+		preview.visible = false
+
 func _get_unlock_prop_icon(prop_name: String) -> Texture2D:
 	# Use the same ingredient definitions as the tea-making scene.
 	var icon_map := {
@@ -182,6 +199,21 @@ func _get_unlock_prop_icon(prop_name: String) -> Texture2D:
 		"White Tea": "res://images/props/whitetea.png", "Roiboss": "res://images/props/roiboss.png"
 	}
 	return load(icon_map.get(prop_name, ""))
+
+func _get_unlock_prop_card(prop_name: String) -> String:
+	var card_map := {
+		"Cinnamon": "res://images/cards/cinnamon.png", "Lizard Liver": "res://images/cards/lizard_liver.png",
+		"Poppy Seed": "res://images/cards/poppy_seed.png", "Honey": "res://images/cards/honey.png",
+		"Vinegar": "res://images/cards/vinegar.png", "Unicorn Feather": "res://images/cards/unicorn_feather.png",
+		"Jasmine Petal": "res://images/cards/jasmine_petal.png", "Whisky": "res://images/cards/whisky.png",
+		"Vanilla": "res://images/cards/vanilla.png", "Chili": "res://images/cards/chili.png",
+		"Chocolate": "res://images/cards/chocolate.png", "Herbal Tea": "res://images/cards/herbal_tea.png",
+		"Water of Life": "res://images/cards/water_of_life.png", "Cloves": "res://images/cards/cloves.png",
+		"Ginger": "res://images/cards/ginger.png", "Orange Peels": "res://images/cards/orange_peels.png",
+		"Rose Petal": "res://images/cards/rose_petal.png", "Mate Tea": "res://images/cards/mate_tea.png",
+		"White Tea": "res://images/cards/white_tea.png", "Roiboss": "res://images/cards/roiboss.png"
+	}
+	return card_map.get(prop_name, "")
 
 func _on_unlock_option_pressed(prop_name: String, overlay: Control, successful: bool) -> void:
 	get_node("/root/UnlockDatabase").choose(prop_name)
