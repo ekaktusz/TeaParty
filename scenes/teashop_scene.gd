@@ -104,7 +104,7 @@ func _show_unlock_choice(successful: bool) -> void:
 	add_child(overlay)
 	var outer_panel := Panel.new()
 	outer_panel.position = Vector2(510, 245)
-	outer_panel.size = Vector2(900, 500)
+	outer_panel.size = Vector2(900, 650)
 	var outer_style := StyleBoxFlat.new()
 	outer_style.bg_color = Color(0, 0, 0, 1)
 	outer_style.corner_radius_top_left = 20
@@ -115,7 +115,7 @@ func _show_unlock_choice(successful: bool) -> void:
 	overlay.add_child(outer_panel)
 	var panel := Panel.new()
 	panel.position = Vector2(5, 5)
-	panel.size = Vector2(890, 490)
+	panel.size = Vector2(890, 640)
 	var panel_style := StyleBoxFlat.new()
 	panel_style.bg_color = Color(0.92549, 0.796078, 0.619608, 1)
 	panel_style.corner_radius_top_left = 20
@@ -143,43 +143,19 @@ func _show_unlock_choice(successful: bool) -> void:
 	subtitle.add_theme_color_override("font_color", Color(0.27, 0.20, 0.10))
 	panel.add_child(subtitle)
 	var options: Array[String] = get_node("/root/UnlockDatabase").get_pending_options()
-	var unlock_preview := TextureRect.new()
-	unlock_preview.position = Vector2(1430, 250)
-	unlock_preview.size = Vector2(320, 430)
-	unlock_preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	unlock_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	unlock_preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	unlock_preview.visible = false
-	overlay.add_child(unlock_preview)
 	for i in 2:
-		var choice := VBoxContainer.new()
-		choice.position = Vector2(70 + i * 400, 140)
-		choice.size = Vector2(330, 285)
-		choice.alignment = BoxContainer.ALIGNMENT_CENTER
-		choice.add_theme_constant_override("separation", 8)
-		var icon_button := TextureButton.new()
-		icon_button.custom_minimum_size = Vector2(210, 210)
-		icon_button.texture_normal = _get_unlock_prop_icon(options[i])
-		icon_button.ignore_texture_size = true
-		icon_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-		icon_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		icon_button.pivot_offset = Vector2(105, 105)
-		icon_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		icon_button.mouse_entered.connect(_on_unlock_icon_hover.bind(icon_button, true))
-		icon_button.mouse_exited.connect(_on_unlock_icon_hover.bind(icon_button, false))
-		icon_button.mouse_entered.connect(_on_unlock_preview_hover.bind(unlock_preview, _get_unlock_prop_card(options[i]), true))
-		icon_button.mouse_exited.connect(_on_unlock_preview_hover.bind(unlock_preview, "", false))
-		icon_button.pressed.connect(_on_unlock_option_pressed.bind(options[i], overlay, successful))
-		choice.add_child(icon_button)
-		var name_label := Label.new()
-		name_label.text = options[i]
-		name_label.custom_minimum_size = Vector2(330, 45)
-		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		name_label.add_theme_font_override("font", preload("res://fonts/Laila-Bold.ttf"))
-		name_label.add_theme_font_size_override("font_size", 26)
-		name_label.add_theme_color_override("font_color", Color(0.27, 0.20, 0.10))
-		choice.add_child(name_label)
-		panel.add_child(choice)
+		var card_button := TextureButton.new()
+		card_button.position = Vector2(70 + i * 400, 140)
+		card_button.size = Vector2(330, 450)
+		card_button.texture_normal = load(_get_unlock_prop_card(options[i]))
+		card_button.ignore_texture_size = true
+		card_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+		card_button.pivot_offset = Vector2(165, 225)
+		card_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		card_button.mouse_entered.connect(_on_unlock_icon_hover.bind(card_button, true))
+		card_button.mouse_exited.connect(_on_unlock_icon_hover.bind(card_button, false))
+		card_button.pressed.connect(_on_unlock_option_pressed.bind(options[i], overlay, successful))
+		panel.add_child(card_button)
 
 func _on_unlock_icon_hover(icon_button: TextureButton, hovered: bool) -> void:
 	var tween := create_tween()
