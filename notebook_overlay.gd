@@ -93,8 +93,9 @@ func _build_interface() -> void:
 	_history_list.add_child(_empty_label)
 
 	_toggle_button = Button.new()
-	_toggle_button.position = Vector2(28, 24)
-	_toggle_button.size = Vector2(190, 62)
+	# Keep the notes control paired with the customer dialogue in the tea-making scene.
+	_toggle_button.position = Vector2(94, 650)
+	_toggle_button.size = Vector2(346, 62)
 	_toggle_button.text = "Open notes"
 	_toggle_button.focus_mode = Control.FOCUS_NONE
 	_toggle_button.add_theme_font_override("font", FONT)
