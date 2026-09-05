@@ -221,6 +221,19 @@ func get_revealed_clue_sets() -> Array:
 		revealed_clues.append(customer.correctItems[index])
 	return revealed_clues
 
+func get_next_required_clue_set() -> Array[String]:
+	var customer = get_current_customer()
+	var result: Array[String] = []
+	if customer == null:
+		return result
+
+	var next_level: int = customer.customerCurrentLevel + 1
+	if next_level >= customer.correctItems.size():
+		return result
+	for ingredient_name in customer.correctItems[next_level]:
+		result.append(ingredient_name)
+	return result
+
 func next_customer(excluded_customer: CustomerData = null) -> void:
 	if _active_customers.is_empty():
 		_current_customer_id = 0
