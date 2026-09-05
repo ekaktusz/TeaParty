@@ -7,6 +7,7 @@ var text_tween: Tween
 const DEFAULT_BACKGROUND_COLOR := Color(0.92549, 0.796078, 0.619608, 1)
 const ACCEPT_BACKGROUND_COLOR := Color(0.78, 0.92, 0.78, 1)
 const REJECT_BACKGROUND_COLOR := Color(0.96, 0.78, 0.78, 1)
+const TEXT_CHARACTERS_PER_SECOND := 30.0
 
 func _ready():
 	#start_print_effect()
@@ -18,9 +19,15 @@ func start_print_effect():
 		text_tween.kill()
 		text_tween = null
 	self.is_complete = false
-	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.visible_ratio = 0
+	var rich_text_label: RichTextLabel = $MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel
+	rich_text_label.visible_ratio = 0
+	var character_count := rich_text_label.get_total_character_count()
+	if character_count == 0:
+		tween_complete()
+		return
 	text_tween = get_tree().create_tween()
-	text_tween.tween_property($MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel, "visible_ratio", 1, 2)
+	var reveal_duration := float(character_count) / TEXT_CHARACTERS_PER_SECOND
+	text_tween.tween_property(rich_text_label, "visible_ratio", 1, reveal_duration)
 	text_tween.tween_callback(self.tween_complete)
 
 func reveal_text() -> void:
