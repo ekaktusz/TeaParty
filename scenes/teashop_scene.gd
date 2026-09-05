@@ -177,6 +177,7 @@ func _get_unlock_prop_icon(prop_name: String) -> Texture2D:
 	# Use the same ingredient definitions as the tea-making scene.
 	var icon_map := {
 		"Cinnamon": "res://images/props/cinnamon.png", "Lizard Liver": "res://images/props/lizard_liver.png",
+		"Nutmeg": "res://images/props/nutmeg.png", "Maple Syrup": "res://images/props/maple_syrup.png",
 		"Poppy Seed": "res://images/props/poppy_seed.png", "Honey": "res://images/props/honey.png",
 		"Vinegar": "res://images/props/vinegar.png", "Unicorn Feather": "res://images/props/unicorn_feather.png",
 		"Jasmine Petal": "res://images/props/jasmine.png", "Whisky": "res://images/props/whisky.png",
@@ -192,6 +193,7 @@ func _get_unlock_prop_icon(prop_name: String) -> Texture2D:
 func _get_unlock_prop_card(prop_name: String) -> String:
 	var card_map := {
 		"Cinnamon": "res://images/cards/cinnamon.png", "Lizard Liver": "res://images/cards/lizard_liver.png",
+		"Nutmeg": "res://images/cards/nutmeg.png", "Maple Syrup": "res://images/cards/maple_syrup.png",
 		"Poppy Seed": "res://images/cards/poppy_seed.png", "Honey": "res://images/cards/honey.png",
 		"Vinegar": "res://images/cards/vinegar.png", "Unicorn Feather": "res://images/cards/unicorn_feather.png",
 		"Jasmine Petal": "res://images/cards/jasmine_petal.png", "Whisky": "res://images/cards/whisky.png",
@@ -297,7 +299,7 @@ func _on_button_serve_pressed():
 	var successful: bool = check_ingredients()
 	_record_tea_attempt(successful)
 	if successful:
-		get_node("/root/UnlockDatabase").register_correct_round()
+		get_node("/root/UnlockDatabase").register_correct_round(CustomerDatabase.get_next_required_clue_set())
 		$sip_accept.play()
 		play_winning_dialog()
 	else:

@@ -11,5 +11,6 @@ func _process(delta):
 func _on_start_button_pressed():
 	CustomerDatabase.reset_customer_progress()
 	SelectedIngredient.reset()
+	UnlockDatabase.reset()
 	SceneTransition.change_scene_to_file("res://scenes/menu_scene.tscn")
 	pass # Replace with function body.

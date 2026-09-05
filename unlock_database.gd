@@ -1,6 +1,6 @@
 extends Node
 
-const INITIAL_UNLOCKED := ["Black Tea", "Green Tea", "Frogleg", "Dried Fruits", "Chamomile", "Lemon", "Milk", "Bergamot"]
+const INITIAL_UNLOCKED := ["Black Tea", "Green Tea", "Frogleg", "Dried Fruits", "Chamomile", "Lemon", "Milk", "Bergamot", "Nutmeg", "Maple Syrup"]
 const UNLOCK_ORDER := ["Cinnamon", "Lizard Liver", "Poppy Seed", "Honey", "Vinegar", "Unicorn Feather", "Jasmine Petal", "Whisky", "Vanilla", "Chili", "Chocolate", "Herbal Tea", "Water of Life", "Cloves", "Ginger", "Orange Peels", "Rose Petal", "Mate Tea", "White Tea", "Roiboss"]
 
 var unlocked: Dictionary = {}
@@ -34,9 +34,9 @@ func get_unlocked_names_in_order() -> Array[String]:
 			result.append(name)
 	return result
 
-func register_correct_round() -> void:
+func register_correct_round(next_required_group: Array[String] = []) -> void:
 	if pending_options.is_empty() and not pool.is_empty():
-		pending_options = _build_options()
+		pending_options = _build_options(next_required_group)
 
 func has_pending_choice() -> bool:
 	return pending_options.size() == 2
@@ -58,7 +58,19 @@ func choose(name: String) -> void:
 		cooldown[option] = 1
 	pending_options.clear()
 
-func _build_options() -> Array[String]:
+func _build_options(next_required_group: Array[String]) -> Array[String]:
+	# A customer who has just advanced must be able to satisfy their newly
+	# revealed clue when they next appear in the random rotation. Offering both
+	# alternatives means either player choice keeps that next round solvable.
+	var required_options: Array[String] = []
+	for name in next_required_group:
+		if pool.has(name) and not is_unlocked(name):
+			required_options.append(name)
+	if required_options.size() >= 2:
+		var required_pair: Array[String] = [required_options[0], required_options[1]]
+		_advance_cooldowns()
+		return required_pair
+
 	var options: Array[String] = []
 	for name in pool:
 		if cooldown.get(name, 0) > 0:
@@ -66,7 +78,10 @@ func _build_options() -> Array[String]:
 		options.append(name)
 		if options.size() == 2:
 			break
+	_advance_cooldowns()
+	return options
+
+func _advance_cooldowns() -> void:
 	for name in cooldown.keys():
 		if cooldown[name] > 0:
 			cooldown[name] -= 1
-	return options
