@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dr1e4jx1lpbe7"
-path="res://.godot/imported/cloves.png-77ff2bada2dc33d874fafb2b12623114.ctex"
+path.s3tc="res://.godot/imported/cloves.png-77ff2bada2dc33d874fafb2b12623114.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/cards/cloves.png"
-dest_files=["res://.godot/imported/cloves.png-77ff2bada2dc33d874fafb2b12623114.ctex"]
+dest_files=["res://.godot/imported/cloves.png-77ff2bada2dc33d874fafb2b12623114.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

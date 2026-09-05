@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b48703mavm04n"
-path="res://.godot/imported/cinnamon.png-385bacb8cb6a1f9d4f0e3670b42be734.ctex"
+path.s3tc="res://.godot/imported/cinnamon.png-385bacb8cb6a1f9d4f0e3670b42be734.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/cards/cinnamon.png"
-dest_files=["res://.godot/imported/cinnamon.png-385bacb8cb6a1f9d4f0e3670b42be734.ctex"]
+dest_files=["res://.godot/imported/cinnamon.png-385bacb8cb6a1f9d4f0e3670b42be734.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

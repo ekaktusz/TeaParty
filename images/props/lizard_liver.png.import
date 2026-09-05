@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccnk2lwraqcm2"
-path="res://.godot/imported/lizard_liver.png-0fd02b6801a5cc1cbd6b275e2e1d22a3.ctex"
+path.s3tc="res://.godot/imported/lizard_liver.png-0fd02b6801a5cc1cbd6b275e2e1d22a3.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/props/lizard_liver.png"
-dest_files=["res://.godot/imported/lizard_liver.png-0fd02b6801a5cc1cbd6b275e2e1d22a3.ctex"]
+dest_files=["res://.godot/imported/lizard_liver.png-0fd02b6801a5cc1cbd6b275e2e1d22a3.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

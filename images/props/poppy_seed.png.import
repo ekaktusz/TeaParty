@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7bfo562curqp"
-path="res://.godot/imported/poppy_seed.png-4e29de429dd8b395b99a0b8ea853ec53.ctex"
+path.s3tc="res://.godot/imported/poppy_seed.png-4e29de429dd8b395b99a0b8ea853ec53.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/props/poppy_seed.png"
-dest_files=["res://.godot/imported/poppy_seed.png-4e29de429dd8b395b99a0b8ea853ec53.ctex"]
+dest_files=["res://.godot/imported/poppy_seed.png-4e29de429dd8b395b99a0b8ea853ec53.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

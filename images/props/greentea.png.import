@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5dug5dk0e2nn"
-path="res://.godot/imported/greentea.png-7bfed0470c95ad125f352aa5090ef61f.ctex"
+path.s3tc="res://.godot/imported/greentea.png-7bfed0470c95ad125f352aa5090ef61f.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/props/greentea.png"
-dest_files=["res://.godot/imported/greentea.png-7bfed0470c95ad125f352aa5090ef61f.ctex"]
+dest_files=["res://.godot/imported/greentea.png-7bfed0470c95ad125f352aa5090ef61f.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

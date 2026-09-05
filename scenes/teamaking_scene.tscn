@@ -46,7 +46,7 @@ texture = SubResource("CompressedTexture2D_v4cqo")
 
 [node name="CurrentSelectedProp" type="Sprite2D" parent="."]
 position = Vector2(1552, 415)
-scale = Vector2(0.300252, 0.300252)
+scale = Vector2(0.683, 0.683)
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 485.0

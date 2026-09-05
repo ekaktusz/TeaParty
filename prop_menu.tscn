@@ -17,14 +17,16 @@ script = ExtResource("1_vu4vh")
 custom_minimum_size = Vector2(130, 130)
 layout_mode = 2
 texture = SubResource("CompressedTexture2D_m6fwx")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 modulate = Color(0.454524, 0.454524, 0.454524, 1)
 custom_minimum_size = Vector2(130, 130)
 layout_mode = 2
 texture = SubResource("CompressedTexture2D_m6fwx")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="blub" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_3m21u")

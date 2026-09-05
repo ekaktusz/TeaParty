@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dei30nwh7vctg"
-path="res://.godot/imported/herbal_tea.png-f49576b1944653afff92324cd720b0dd.ctex"
+path.s3tc="res://.godot/imported/herbal_tea.png-f49576b1944653afff92324cd720b0dd.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/cards/herbal_tea.png"
-dest_files=["res://.godot/imported/herbal_tea.png-f49576b1944653afff92324cd720b0dd.ctex"]
+dest_files=["res://.godot/imported/herbal_tea.png-f49576b1944653afff92324cd720b0dd.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

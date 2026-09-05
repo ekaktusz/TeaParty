@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bs00yy6y5i82n"
-path="res://.godot/imported/ginger.png-60ede25a3e874939d90dfb5e09ecf889.ctex"
+path.s3tc="res://.godot/imported/ginger.png-60ede25a3e874939d90dfb5e09ecf889.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/cards/ginger.png"
-dest_files=["res://.godot/imported/ginger.png-60ede25a3e874939d90dfb5e09ecf889.ctex"]
+dest_files=["res://.godot/imported/ginger.png-60ede25a3e874939d90dfb5e09ecf889.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

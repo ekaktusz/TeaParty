@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wwglrjycebv8"
-path="res://.godot/imported/orange_peels.png-0a91dd48e35b38e61c045d135bb87317.ctex"
+path.s3tc="res://.godot/imported/orange_peels.png-0a91dd48e35b38e61c045d135bb87317.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/cards/orange_peels.png"
-dest_files=["res://.godot/imported/orange_peels.png-0a91dd48e35b38e61c045d135bb87317.ctex"]
+dest_files=["res://.godot/imported/orange_peels.png-0a91dd48e35b38e61c045d135bb87317.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

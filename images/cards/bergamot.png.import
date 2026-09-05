@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dy7rh63ax10g"
-path="res://.godot/imported/bergamot.png-fec4dd602b45d6dd49d67a95b2fd72ea.ctex"
+path.s3tc="res://.godot/imported/bergamot.png-fec4dd602b45d6dd49d67a95b2fd72ea.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/cards/bergamot.png"
-dest_files=["res://.godot/imported/bergamot.png-fec4dd602b45d6dd49d67a95b2fd72ea.ctex"]
+dest_files=["res://.godot/imported/bergamot.png-fec4dd602b45d6dd49d67a95b2fd72ea.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

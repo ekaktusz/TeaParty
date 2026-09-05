@@ -99,7 +99,8 @@ offset_top = 788.0
 offset_right = 845.0
 offset_bottom = 918.0
 texture = SubResource("CompressedTexture2D_m6fwx")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ing2" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(130, 130)
@@ -109,7 +110,8 @@ offset_top = 789.0
 offset_right = 1050.0
 offset_bottom = 919.0
 texture = SubResource("CompressedTexture2D_m6fwx")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ing3" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(130, 130)
@@ -119,7 +121,8 @@ offset_top = 794.0
 offset_right = 1271.0
 offset_bottom = 924.0
 texture = SubResource("CompressedTexture2D_m6fwx")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="sip_accept" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_6jiad")

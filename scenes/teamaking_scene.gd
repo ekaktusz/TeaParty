@@ -217,7 +217,7 @@ func _restore_selected_ingredients() -> void:
 		slot.enable()
 		for child in $GridContainer.get_children():
 			var card := child as IngredientCard
-			if card.prop_data == saved_ingredient:
+			if card.prop_data != null and card.prop_data.prop_name == saved_ingredient.prop_name:
 				card.disable()
 				break
 
@@ -262,7 +262,7 @@ func _on_card_removal_requested(slot: IngredientCard) -> void:
 	var removed_prop := slot.prop_data
 	for child in $GridContainer.get_children():
 		var card := child as IngredientCard
-		if card.prop_data == removed_prop:
+		if card.prop_data != null and removed_prop != null and card.prop_data.prop_name == removed_prop.prop_name:
 			card.enable()
 			break
 	slot.clear_prop()
