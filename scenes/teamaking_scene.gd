@@ -176,7 +176,8 @@ func _ready():
 	for slot in _selected_slots():
 		slot.is_selected_slot = true
 		_connect_card(slot)
-		slot.clear_prop()
+
+	_restore_selected_ingredients()
 	
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = CustomerDatabase.get_current_customer().get_current_order_dialog()
 	_update_make_tea_button()
@@ -195,6 +196,30 @@ func _selected_slots() -> Array[IngredientCard]:
 		$SelectedProp2 as IngredientCard,
 		$SelectedProp3 as IngredientCard
 	]
+
+
+func _restore_selected_ingredients() -> void:
+	var saved_ingredients: Array[PropData] = [
+		SelectedIngredient.prop1,
+		SelectedIngredient.prop2,
+		SelectedIngredient.prop3
+	]
+	var slots := _selected_slots()
+
+	for index in range(slots.size()):
+		var slot := slots[index]
+		var saved_ingredient := saved_ingredients[index]
+		if saved_ingredient == null:
+			slot.clear_prop()
+			continue
+
+		slot.setup(saved_ingredient)
+		slot.enable()
+		for child in $GridContainer.get_children():
+			var card := child as IngredientCard
+			if card.prop_data == saved_ingredient:
+				card.disable()
+				break
 
 
 func has_empty_slot() -> bool:
@@ -241,6 +266,7 @@ func _on_card_removal_requested(slot: IngredientCard) -> void:
 			card.enable()
 			break
 	slot.clear_prop()
+	UiSounds.play_ingredient_removed()
 	_update_make_tea_button()
 
 
@@ -249,6 +275,7 @@ func _update_make_tea_button() -> void:
 
 func _show_unlock_choice() -> void:
 	$GridContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	UiSounds.play_unlock_reveal()
 	var overlay := ColorRect.new()
 	overlay.name = "UnlockChoiceOverlay"
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -307,8 +334,7 @@ func _unlock_database() -> Node:
 	return get_node("/root/UnlockDatabase")
 func _on_selec_button_pressed():
 	SteamSound.play()
-	SceneTransition.change_scene_to_file("res://scenes/teashop_scene.tscn")
 	SelectedIngredient.prop1 = $SelectedProp1.prop_data
 	SelectedIngredient.prop2 = $SelectedProp2.prop_data
 	SelectedIngredient.prop3 = $SelectedProp3.prop_data
-	pass # Replace with function body.
+	SceneTransition.change_scene_to_file("res://scenes/teashop_scene.tscn")

@@ -106,6 +106,7 @@ func toggle() -> void:
 	if _tween != null:
 		_tween.kill()
 	is_open = not is_open
+	UiSounds.play_paper(is_open)
 	if is_open:
 		refresh()
 		var preview := get_parent().get_node_or_null("CurrentSelectedProp")

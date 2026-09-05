@@ -28,6 +28,7 @@ SelectedIngredient="*res://selected_ingredients.gd"
 UnlockDatabase="*res://unlock_database.gd"
 BgNoises="*res://bg_noises.tscn"
 SteamSound="*res://steam_sound.tscn"
+UiSounds="*res://ui_sounds.gd"
 
 [display]
 

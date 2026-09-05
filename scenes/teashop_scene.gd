@@ -98,6 +98,7 @@ func _finish_customer_transition(successful: bool) -> void:
 
 func _show_unlock_choice(successful: bool) -> void:
 	waiting_for_unlock_choice = true
+	UiSounds.play_unlock_reveal()
 	var overlay := ColorRect.new()
 	overlay.name = "UnlockChoiceOverlay"
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
