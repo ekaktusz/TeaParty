@@ -1,113 +1,136 @@
+class_name IngredientCard
 extends MarginContainer
 
-var mouseOnCard: bool = false
-const DEFAULT_ALPHA: float = 100. / 255.
-var hoverOpacityChangeSpeed: float = 0.09
+signal hover_started(card)
+signal hover_ended(card)
+signal selection_requested(card)
+signal removal_requested(card)
 
-var propData: PropData
+const DEFAULT_ALPHA := 100.0 / 255.0
+const HOVER_DURATION := 0.12
+const HOVER_SCALE := Vector2(1.06, 1.06)
 
-var disabled = false
-var locked = false
-var hover_tween: Tween
-var notRealShit = false # meaning that its not in the inventory but it's a dummy object in the bottom showing one of the selected items
+var prop_data: PropData
+var is_selected_slot := false
+var is_disabled := false
+var is_locked := false
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	$TextureRect2.modulate.a = DEFAULT_ALPHA
+var _is_hovered := false
+var _hover_tween: Tween
+var _preview_texture: Texture2D
+
+
+func _ready() -> void:
 	pivot_offset = Vector2(65, 65)
-	#print("hmm")
-	pass # Replace with function body.
-
-func load(propdata: PropData):
-	self.propData = propdata
-	$TextureRect.texture = load(propdata.propIconPath)
-	$TextureRect2.texture = load(propdata.propIconPath)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if disabled:
-		return
-	
-	if mouseOnCard:
-		var parentScene = get_parent().get_parent()
-		if self.notRealShit:
-			parentScene = get_parent()
-		var currentSelectedProp = parentScene.get_node("CurrentSelectedProp")
-		currentSelectedProp.texture = load(self.propData.propCardPath)
-		#print(currentSelectedProp.name)
-			
-		if $TextureRect2.modulate.a > 0:
-			$TextureRect2.modulate.a -= hoverOpacityChangeSpeed
-	else:
-		if $TextureRect2.modulate.a <= DEFAULT_ALPHA:
-			$TextureRect2.modulate.a += hoverOpacityChangeSpeed
-	pass
-	
-func _input(event):
-	for overlay in get_tree().get_nodes_in_group("notebook_overlay"):
-		if overlay.is_open:
-			return
-	if disabled:
-		return
-	
-	if event is InputEventMouse:
-		if $TextureRect.get_global_rect().has_point(event.position):
-			#print("asd3")
-			if not mouseOnCard:
-				_set_hover_visual(true)
-			mouseOnCard = true
-		else:
-			if mouseOnCard:
-				_clear_current_card()
-				_set_hover_visual(false)
-			mouseOnCard = false
-	
-	if event is InputEventMouseButton:
-		if get_global_rect().has_point(event.position) and event.pressed:
-			if not self.notRealShit:
-				var parentScene = get_parent().get_parent()
-				if parentScene.can_select():
-					_clear_current_card()
-					self.disable()
-					$blub.play()
-					parentScene.select_prop(self.propData)
-			else:
-				get_parent().return_prop(self.propData)
-				self.disable()
-	pass # Replace with function body.
-
-func disable():
-	locked = false
-	disabled = true
-	$TextureRect2.modulate.a = 0
-	_set_hover_visual(false)
-	$TextureRect.modulate.a = 0
-	
-func enable():
-	locked = false
-	disabled = false
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	$TextureRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$TextureRect2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$TextureRect2.modulate.a = DEFAULT_ALPHA
-	$TextureRect.modulate.a = 1
-	_set_hover_visual(false)
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	gui_input.connect(_on_gui_input)
 
-func lock():
-	locked = true
-	disabled = true
-	# Keep the card visible, but make it unmistakably unavailable.
+
+func setup(data: PropData) -> void:
+	prop_data = data
+	_preview_texture = null
+	var icon_texture := load(prop_data.prop_icon_path) as Texture2D
+	$TextureRect.texture = icon_texture
+	$TextureRect2.texture = icon_texture
+
+
+func clear_prop() -> void:
+	disable()
+	prop_data = null
+	_preview_texture = null
+	$TextureRect.texture = null
+	$TextureRect2.texture = null
+
+
+func get_preview_texture() -> Texture2D:
+	if _preview_texture == null and prop_data != null:
+		_preview_texture = load(prop_data.prop_card_path) as Texture2D
+	return _preview_texture
+
+
+func is_empty() -> bool:
+	return prop_data == null
+
+
+func disable() -> void:
+	is_locked = false
+	is_disabled = true
+	_disable_hover()
+	$TextureRect2.modulate.a = 0.0
+	$TextureRect.modulate.a = 0.0
+
+
+func enable() -> void:
+	is_locked = false
+	is_disabled = false
+	_disable_hover()
+	$TextureRect2.modulate.a = DEFAULT_ALPHA
+	$TextureRect.modulate = Color.WHITE
+
+
+func lock() -> void:
+	is_locked = true
+	is_disabled = true
+	_disable_hover()
 	$TextureRect.modulate = Color(0.16, 0.16, 0.16, 0.92)
-	$TextureRect2.modulate.a = 0
+	$TextureRect2.modulate.a = 0.0
 
-func _clear_current_card() -> void:
-	var parent_scene = get_parent().get_parent()
-	if self.notRealShit:
-		parent_scene = get_parent()
-	var preview = parent_scene.get_node_or_null("CurrentSelectedProp")
-	if preview != null:
-		preview.texture = null
+
+func play_selection_sound() -> void:
+	$blub.play()
+
+
+func _on_mouse_entered() -> void:
+	if is_disabled or prop_data == null:
+		return
+	_is_hovered = true
+	_set_hover_visual(true)
+	hover_started.emit(self)
+
+
+func _on_mouse_exited() -> void:
+	if not _is_hovered:
+		return
+	_is_hovered = false
+	_set_hover_visual(false)
+	hover_ended.emit(self)
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if is_disabled or prop_data == null:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		accept_event()
+		if is_selected_slot:
+			removal_requested.emit(self)
+		else:
+			selection_requested.emit(self)
+
+
+func _disable_hover() -> void:
+	if _is_hovered:
+		_is_hovered = false
+		hover_ended.emit(self)
+	_kill_hover_tween()
+	scale = Vector2.ONE
+
 
 func _set_hover_visual(hovered: bool) -> void:
-	if hover_tween != null:
-		hover_tween.kill()
-	hover_tween = create_tween()
-	hover_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	hover_tween.tween_property(self, "scale", Vector2(1.06, 1.06) if hovered else Vector2.ONE, 0.12)
+	_kill_hover_tween()
+	var target_modulate: Color = $TextureRect2.modulate
+	target_modulate.a = 0.0 if hovered else DEFAULT_ALPHA
+	_hover_tween = create_tween()
+	_hover_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_hover_tween.tween_property(self, "scale", HOVER_SCALE if hovered else Vector2.ONE, HOVER_DURATION)
+	_hover_tween.parallel().tween_property($TextureRect2, "modulate", target_modulate, HOVER_DURATION)
+
+
+func _kill_hover_tween() -> void:
+	if _hover_tween != null:
+		_hover_tween.kill()
+		_hover_tween = null

@@ -1,6 +1,8 @@
 extends Node2D
 
-var PropMenu = load("res://prop_menu.tscn")
+const PROP_MENU_SCENE := preload("res://prop_menu.tscn")
+
+var _preview_card: IngredientCard
 
 var inventory = [
 	""
@@ -165,48 +167,85 @@ func _ready():
 		for item in self.props:
 			if item.propName != ingredient_name:
 				continue
-			var prop = PropMenu.instantiate()
-			prop.load(item)
+			var prop := PROP_MENU_SCENE.instantiate() as IngredientCard
+			prop.setup(item)
+			_connect_card(prop)
 			$GridContainer.add_child(prop)
 			break
 		
-	$SelectedProp1.disable()
-	$SelectedProp1.notRealShit = true
-	$SelectedProp2.disable()
-	$SelectedProp2.notRealShit = true
-	$SelectedProp3.disable()
-	$SelectedProp3.notRealShit = true
+	for slot in _selected_slots():
+		slot.is_selected_slot = true
+		_connect_card(slot)
+		slot.clear_prop()
 	
 	$MarginContainer/MarginContainer/Panel/MarginContainer/RichTextLabel.text = CustomerDatabase.get_current_customer().get_current_order_dialog()
-	pass # Replace with function body.
+	_update_make_tea_button()
 
-func return_prop(propData: PropData):
-	var allProps = $GridContainer.get_children()
-	for prop in allProps:
-		if prop.propData == propData:
-			prop.enable()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	$Button.disabled = can_select()
-	pass
-	
-func can_select():
-	return $SelectedProp1.disabled or $SelectedProp2.disabled or $SelectedProp3.disabled
+func _connect_card(card: IngredientCard) -> void:
+	card.hover_started.connect(_on_card_hover_started)
+	card.hover_ended.connect(_on_card_hover_ended)
+	card.selection_requested.connect(_on_card_selection_requested)
+	card.removal_requested.connect(_on_card_removal_requested)
 
-func select_prop(propData: PropData):
-	if $SelectedProp1.disabled:
-		$SelectedProp1.load(propData)
-		$SelectedProp1.enable()
+
+func _selected_slots() -> Array[IngredientCard]:
+	return [
+		$SelectedProp1 as IngredientCard,
+		$SelectedProp2 as IngredientCard,
+		$SelectedProp3 as IngredientCard
+	]
+
+
+func has_empty_slot() -> bool:
+	for slot in _selected_slots():
+		if slot.is_empty():
+			return true
+	return false
+
+
+func is_recipe_ready() -> bool:
+	return not has_empty_slot()
+
+
+func _on_card_hover_started(card: IngredientCard) -> void:
+	_preview_card = card
+	$CurrentSelectedProp.texture = card.get_preview_texture()
+
+
+func _on_card_hover_ended(card: IngredientCard) -> void:
+	if _preview_card == card:
+		_preview_card = null
+		$CurrentSelectedProp.texture = null
+
+
+func _on_card_selection_requested(card: IngredientCard) -> void:
+	if not has_empty_slot():
 		return
-	if $SelectedProp2.disabled:
-		$SelectedProp2.load(propData)
-		$SelectedProp2.enable()
+	for slot in _selected_slots():
+		if not slot.is_empty():
+			continue
+		slot.setup(card.prop_data)
+		slot.enable()
+		card.play_selection_sound()
+		card.disable()
+		_update_make_tea_button()
 		return
-	if $SelectedProp3.disabled:
-		$SelectedProp3.load(propData)
-		$SelectedProp3.enable()
-		return
+
+
+func _on_card_removal_requested(slot: IngredientCard) -> void:
+	var removed_prop := slot.prop_data
+	for child in $GridContainer.get_children():
+		var card := child as IngredientCard
+		if card.prop_data == removed_prop:
+			card.enable()
+			break
+	slot.clear_prop()
+	_update_make_tea_button()
+
+
+func _update_make_tea_button() -> void:
+	$Button.disabled = not is_recipe_ready()
 
 func _show_unlock_choice() -> void:
 	$GridContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -259,8 +298,9 @@ func _on_unlock_option_pressed(prop_name: String, overlay: Control) -> void:
 	_unlock_database().choose(prop_name)
 	overlay.queue_free()
 	$GridContainer.mouse_filter = Control.MOUSE_FILTER_PASS
-	for prop in $GridContainer.get_children():
-		if _unlock_database().is_unlocked(prop.propData.propName):
+	for child in $GridContainer.get_children():
+		var prop := child as IngredientCard
+		if _unlock_database().is_unlocked(prop.prop_data.prop_name):
 			prop.enable()
 
 func _unlock_database() -> Node:
@@ -268,7 +308,7 @@ func _unlock_database() -> Node:
 func _on_selec_button_pressed():
 	SteamSound.play()
 	SceneTransition.change_scene_to_file("res://scenes/teashop_scene.tscn")
-	SelectedIngredient.prop1 = $SelectedProp1.propData
-	SelectedIngredient.prop2 = $SelectedProp2.propData
-	SelectedIngredient.prop3 = $SelectedProp3.propData
+	SelectedIngredient.prop1 = $SelectedProp1.prop_data
+	SelectedIngredient.prop2 = $SelectedProp2.prop_data
+	SelectedIngredient.prop3 = $SelectedProp3.prop_data
 	pass # Replace with function body.

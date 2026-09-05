@@ -26,4 +26,3 @@ func _init(in_name: String = "", icon_path: String = "", card_path: String = "")
 	prop_name = in_name
 	prop_icon_path = icon_path
 	prop_card_path = card_path
-
