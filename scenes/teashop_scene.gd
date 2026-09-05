@@ -74,8 +74,10 @@ func on_over_this_customer():
 	if customer_transition_in_progress:
 		return
 	customer_transition_in_progress = true
-	$customer.fade_out()
-	await get_tree().create_timer(1.0).timeout
+	var fade_finished: bool = await $customer.fade_out()
+	if not fade_finished:
+		customer_transition_in_progress = false
+		return
 	$DialogBox.clear()
 	var successful: bool = check_ingredients()
 	if successful and get_node("/root/UnlockDatabase").has_pending_choice():
@@ -203,6 +205,9 @@ func _get_unlock_prop_card(prop_name: String) -> String:
 	return card_map.get(prop_name, "")
 
 func _on_unlock_option_pressed(prop_name: String, overlay: Control, successful: bool) -> void:
+	if not waiting_for_unlock_choice:
+		return
+	waiting_for_unlock_choice = false
 	get_node("/root/UnlockDatabase").choose(prop_name)
 	overlay.queue_free()
 	_finish_customer_transition(successful)
