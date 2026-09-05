@@ -1,0 +1,64 @@
+name: Publish web build to itch.io
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Avoid two overlapping uploads racing to become the current itch.io build.
+concurrency:
+  group: itch-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  export-web:
+    name: Export Godot web build
+    runs-on: ubuntu-latest
+    # Matches the Godot version declared in project.godot (4.7).
+    container: barichello/godot-ci:4.7.2
+
+    steps:
+      - name: Check out the game
+        uses: actions/checkout@v4
+
+      - name: Export the Web preset
+        run: |
+          mkdir -p build/web
+          godot --headless --path "$GITHUB_WORKSPACE" --export-release "Web" "$GITHUB_WORKSPACE/build/web/index.html"
+
+      - name: Pass exported game to publishing job
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+          if-no-files-found: error
+          retention-days: 1
+
+  publish-itch:
+    name: Publish to itch.io
+    needs: export-web
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download exported game
+        uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+
+      - name: Install butler
+        run: |
+          curl --fail --location --retry 3 \
+            --output "$RUNNER_TEMP/butler.zip" \
+            https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
+          unzip -q "$RUNNER_TEMP/butler.zip" -d "$RUNNER_TEMP/butler"
+          chmod +x "$RUNNER_TEMP/butler/butler"
+
+      - name: Upload the web build
+        env:
+          BUTLER_API_KEY: ${{ secrets.ITCHIO_API_KEY }}
+        run: |
+          "$RUNNER_TEMP/butler/butler" push build/web zahkros/tearapy:web --userversion "$GITHUB_SHA"
