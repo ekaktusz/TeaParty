@@ -4,13 +4,13 @@ const PAPER_MOVE := preload("res://sfx/paper_move.wav")
 const GLASS_PING := preload("res://sfx/glass_ping_small.wav")
 const WHOOSH := preload("res://sfx/whoosh_1.wav")
 
-const UI_BUS := &"Master"
+const SFX_BUS := &"SFX"
 
 func _ready() -> void:
 	for stream in [PAPER_MOVE, GLASS_PING, WHOOSH]:
 		var player := AudioStreamPlayer.new()
 		player.stream = stream
-		player.bus = UI_BUS
+		player.bus = SFX_BUS
 		player.volume_db = -8.0
 		add_child(player)
 

@@ -4,3 +4,4 @@
 
 [node name="steam" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_8v8op")
+bus = &"SFX"

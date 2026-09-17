@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5i6tvxwuxwxy"]
+[gd_scene format=3 uid="uid://c5i6tvxwuxwxy"]
 
-[ext_resource type="Script" path="res://scenes/menu_scene.gd" id="1_dlhbc"]
+[ext_resource type="Script" uid="uid://b0idgq8ye0gaj" path="res://scenes/menu_scene.gd" id="1_dlhbc"]
 [ext_resource type="Texture2D" uid="uid://c731kcdnlfml7" path="res://images/backgrounds/menu-background.png" id="2_w160u"]
 [ext_resource type="FontFile" uid="uid://dtk2bneogp7sv" path="res://fonts/YoungSerif-Regular.ttf" id="3_kcp8i"]
 [ext_resource type="FontFile" uid="uid://dvv3p4nw3crsk" path="res://fonts/Laila-Bold.ttf" id="4_lwp6f"]
@@ -8,7 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://dw66y5nm6hqmn" path="res://scenes/menu_button_hover.stylebox" id="6_ubkr4"]
 [ext_resource type="StyleBox" uid="uid://3whymixjrddr" path="res://scenes/menu_button_pressed.stylebox" id="7_kwfjw"]
 
-[node name="MenuScene" type="Control"]
+[node name="MenuScene" type="Control" unique_id=765550320]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dlhbc")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=624965394]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_w160u")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=985516368]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,10 +36,10 @@ grow_vertical = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_right = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=204854136]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=512952685]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -52,27 +52,27 @@ text = "Tearapy"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=108449077]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=2030356565]
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_right = 100
 
-[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer" unique_id=1374284542]
 layout_mode = 2
 focus_mode = 0
 theme_override_fonts/font = ExtResource("4_lwp6f")
 theme_override_font_sizes/font_size = 70
 theme_override_styles/normal = ExtResource("5_d2b7m")
-theme_override_styles/hover = ExtResource("6_ubkr4")
 theme_override_styles/pressed = ExtResource("7_kwfjw")
+theme_override_styles/hover = ExtResource("6_ubkr4")
 text = "Start Game"
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1211082324]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)

@@ -30,3 +30,4 @@ stretch_mode = 5
 
 [node name="blub" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_3m21u")
+bus = &"SFX"

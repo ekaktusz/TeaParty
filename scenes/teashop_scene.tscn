@@ -124,12 +124,15 @@ stretch_mode = 5
 
 [node name="sip_accept" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_6jiad")
+bus = &"SFX"
 
 [node name="sip_decline" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_nmoub")
+bus = &"SFX"
 
 [node name="door_bell" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_3iyq4")
+bus = &"SFX"
 
 [node name="click_for_next" type="Label" parent="."]
 layout_mode = 0
