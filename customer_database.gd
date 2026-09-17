@@ -29,18 +29,18 @@ var _customers: Array[CustomerData] = [
 		"Brr, the weather is rather familiar, but this country has nothing to offer me. Pff, a tea shop?!? The audacity...",
 		[
 			"I feel tired, let's see if you could give me some [b][i]caffeine[/i][/b]. \n[b]Select ingredients by clicking on them. Read the descriptions if you are unsure which one to use.[/b]",
-			"So you think you know tea, lad? [b]Same tea as last time[/b], but make it [b][i]spicy[/i][/b]!",
-			"Gives me [b]energy[/b], has some [b]spice[/b], but [b][i]the taste of home[/i][/b] is what your tea is still missing."
+			"So you think you know tea, lad? Same [b]caffeine-heavy[/b] beverage please, but make it [b][i]spicy[/i][/b]!",
+			"Gives me [b]energy[/b], has some [b]spice[/b], but the [b][i]taste of home[/i][/b] is what would bring your tea together."
 		],
 		[
-			"Bloody hell, this isn't what I asked for, mate! ",
-			"Sorry... That's just not my cup of tea.",
-			"Bleee, this is far from the King's standard, innit?"
+			"Bloody hell, this isn't what I asked for!",
+			"Blimey... That's just not my cup of tea.",
+			"Bleee, this is far from the King's standards, innit?"
 		],
 		[
 			"Just what the doctor ordered!",
-			"Sugar, spice, and everything nice! (Except for the sugar, let's keep that for the Americans.)",
-			"Oh my Lord, you did it. It's bloody brilliant. I must assume you also have some history exploiting other sub-continents for centuries to have this level of knowledge of tea making in your blood."
+			"So you know how to make a nice Earl Grey. I'll see you around!",
+			"Oh my Lord, you did it. It's bloody brilliant. I must assume you also have some history exploiting other sub-continents for centuries to have this level of knowledge of tea-making in your blood."
 		],
 		"res://images/characthers/CozyJam2023_lumberjack.png",
 		[
@@ -53,19 +53,19 @@ var _customers: Array[CustomerData] = [
 		"Heartbroken Butcher",
 		"Greetings! You know me, you buy meat at my shop. Anyway... those were better days... My gal just left me! What am I supposed to do now?!",
 		[
-			"To be honest I don't even care, just give me something that resembles the [b]colors of different seasons[/b], when life was happier...",
-			"Hey... Now that you got the [b]colors[/b] right, could you put in some [b]sour stuff[/b] to better match my mood?",
-			"I like the [b]color[/b], the [b]sourness[/b] is just fine, and I don't need salt, my tears are enought... Oh I see a [b]girls name[/b] in your inventory though..."
+			"To be honest I don't even care, just give me something that resembles the [b][i]color[/i][/b] of different seasons, when life was happier...",
+			"Hey... Now that you've got the [b]colors[/b] right, could you make it [b][i]sour[/i][/b] to better match my mood?",
+			"I like the [b]color[/b], the [b]sourness[/b] is just fine, and I don't need salt, my tears are enough... Oh I see a [b][i]girl's name[/i][/b] in your inventory though..."
 		],
 		[
 			"It tastes just how I feel. Awful!",
 			"But not like this! Eww...",
-			"Pfff, what is this, poision? I wish, that would end my suffer."
+			"Pfff, what is this, poison? I wish... That would end my suffering."
 		],
 		[
 			"From winter to spring, we were together. Thanks!",
 			"If I could be enthusiastic about anything, I would really like this tea.",
-			"Hmm...it....works? My hearth is healed, my mind is cleared. You are a magician young man. I'm ready to swipe again. Who's that chick in the corner?"
+			"Hmm...it....works? My heart is healed, my mind is cleared. You are a magician, young man. I'm ready to swipe again. Who's that chick in the corner?"
 		],
 		"res://images/characthers/CozyJam2023_Butcher_happy.png",
 		[
@@ -76,20 +76,20 @@ var _customers: Array[CustomerData] = [
 	),
 	CustomerData.new(
 		"Little Witch",
-		"I gotta get my homework done quick, or my master will surely turn me into a mouse... But maybe a cup of tea could help the creative juices flowing. ",
+		"I gotta get my homework done quick, or my master will surely turn me into a mouse... But maybe a cup of tea could help the creative juices flow.",
 		[
 			"Hey, mister. I wanna drink something that [b][i]makes me extra jumpy[/i][/b].",
 			"I loved the [b]jumpy juice[/b]! Can you also add something [b][i]small and adorable[/i][/b] to it (like me)? Pretty please!",
 			"Okay. [b]Jumpy[/b] - check. [b]Smol[/b] - check. Now, I want you to add something [b][i]MAGICAL[/i][/b] to the mix!"
 		],
 		[
-			"Eww! I don't want it!",
-			"Mom, can you come and pick me up? 🙁",
+			"Eww! That's not what I need!",
+			"Mom, can you come and pick me up? :(",
 			"That ain't magic, mister. "
 		],
 		[
 			"Ah! That sure was something, mister.",
-			"Ah! Just what I needed.",
+			"Ah! Just what I wanted!",
 			"Muhahaha! FOOL! You did it! YOU DID IT FOR ME! You finished my homework without even knowing. See ya, nerd!"
 		],
 		"res://images/characthers/CozyJam2023_Kid_happy.png",
@@ -104,18 +104,18 @@ var _customers: Array[CustomerData] = [
 		"I love the smell of rain, but I just can't paint anything in this weather.",
 		[
 			"Hi! I'm feeling [b][i]fruity[/i][/b] today. Hit me with your best fruit tea.",
-			"I loved the [b]fruits[/b] last time, but I'm also looking forward to the holiday season. Can you make me something that's also a bit [b][i]festive[/i][/b], please?",
-			"I know this will sound weird, but... Can you make me a [b]festive[/b], [b]fruit tea[/b], that also tastes a bit like a [b][i]bowl of ice cream[/i][/b]?"
+			"I loved the [b]fruits[/b] last time, but I'm also looking forward to the holiday season. Can you add something that gives some [b][i]autumn[/i][/b] vibes to it, please?",
+			"I know this will sound weird, but... Can you make me a [b]fall flavour[/b], [b]fruit tea[/b], that also tastes a bit like a [b][i]bowl of ice cream[/i][/b]?"
 		],
 		[
 			"Thanks, but no thanks.",
-			"Nope.",
-			"No. Just no."
+			"Nope, that's not what fall is about.",
+			"No, God, no. Keep the rest of it."
 		],
 		[
-			"Thanks, man.",
+			"Thanks, man, feels great.",
 			"OMG! I Love it!",
-			"AMAZING! Huh, I spent all day in here, and managed to paint some pretty cool stuff after all. Now, can you tell me a bit more about that handsome butcher boy?;)"
+			"AMAZING! Huh, I spent all day in here, and managed to paint some pretty cool stuff after all. Now, can you tell me a bit more about that handsome butcher guy?;)"
 		],
 		"res://images/characthers/CozyJam2023_paintergirl.png",
 		[
@@ -126,7 +126,7 @@ var _customers: Array[CustomerData] = [
 	),
 		CustomerData.new(
 		"Flower Woman",
-		"What a lovely little tea shop. I can't sell my flowers, because it's so cold outside. But maybe I can warm myself up here, and go back to work refreshed.",
+		"What a lovely little tea shop. I can't sell my flowers, it's so cold outside. But maybe I can warm myself up here, and go back to work refreshed.",
 		[
 			"Good morning, dear. I feel a chill in my bones. Can I ask for something that [b][i]warms[/i][/b] me up?",
 			"Loved the [b]warmth[/b] of that tea. But I do like something [b][i]sugary[/i][/b] in my cup. (Just don't tell my husband. We're on a diet.)",
@@ -151,21 +151,21 @@ var _customers: Array[CustomerData] = [
 	),
 		CustomerData.new(
 		"Punk",
-		"Oi, where am I? Had a banger last night with me mates. Got any change? Need for the bus.",
+		"Oi, where am I? Had a banger last night with me mates. Got any change? Need for the bus I swear.",
 		[
 			"Oi barman, give me a [b][i]beer[/i][/b]... or [b][i]whatever[/i][/b].",
-			"Can I get another [b][i]beer[/i][/b], boss? ",
-			"Can me taste another of your [b][i]special ale[/i][/b] please?"
+			"Can I get another [b][i]beer[/i][/b], mate?",
+			"Can me taste another of your [b][i]special ale[/i][/b]?"
 		],
 		[
-			"Eww! I don't want it!",
-			"Mom, can you come and pick me up? 🙁",
-			"That ain't magic, mister. "
+			"",
+			"",
+			""
 		],
 		[
 			"A drink is a drink alright. (slurp)",
-			"Cheers! (slurp) It was decent, mate. ",
-			"You wasn't kidding, this is the tastiest beverage kissed me lips in a long time. I need to bring me mates to your fine establishment."
+			"Cheers! (slurp) That was decent, boss.",
+			"You wasn't kidding, this is the tastiest beverage to have kissed me lips in a long time. I need to bring me mates to your fine establishment."
 		],
 		"res://images/characthers/CozyJam2023_punk.png",
 		[
