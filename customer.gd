@@ -1,5 +1,7 @@
 extends Node2D
 
+const FADE_DURATION := 1
+
 var fading: bool = false
 var fade_tween: Tween
 var _fade_generation := 0
@@ -31,8 +33,8 @@ func fade_in():
 	var tween := get_tree().create_tween()
 	fade_tween = tween
 	tween.set_parallel(true)
-	tween.tween_property($Sprite2D, "modulate", target_color, 2)
-	tween.tween_property(dbox, "modulate", target_color, 2)
+	tween.tween_property($Sprite2D, "modulate", target_color, FADE_DURATION)
+	tween.tween_property(dbox, "modulate", target_color, FADE_DURATION)
 	tween.set_parallel(false)
 	if not SelectedIngredient.is_valid():
 		tween.tween_callback(_start_dialog_print_effect.bind(dbox, generation))
@@ -47,8 +49,8 @@ func fade_out() -> bool:
 	var tween := get_tree().create_tween()
 	fade_tween = tween
 	tween.set_parallel(true)
-	tween.tween_property($Sprite2D, "modulate", target_color, 2)
-	tween.tween_property(dbox, "modulate", target_color, 2)
+	tween.tween_property($Sprite2D, "modulate", target_color, FADE_DURATION)
+	tween.tween_property(dbox, "modulate", target_color, FADE_DURATION)
 	tween.set_parallel(false)
 	tween.tween_callback(_on_fade_finished.bind(generation))
 	await tween.finished
