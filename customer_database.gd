@@ -113,7 +113,7 @@ var _customers: Array[CustomerData] = [
 			"No, God, no. Keep the rest of it."
 		],
 		[
-			"Thanks, man, feels great.",
+			"Thank you man, feels great.",
 			"OMG! I Love it!",
 			"AMAZING! Huh, I spent all day in here, and managed to paint some pretty cool stuff after all. Now, can you tell me a bit more about that handsome butcher guy?;)"
 		],
