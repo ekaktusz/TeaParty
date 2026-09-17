@@ -175,20 +175,6 @@ func _create_history_row(attempt: Dictionary) -> PanelContainer:
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		ingredients.add_child(icon)
 
-	var result_mark := Label.new()
-	result_mark.custom_minimum_size = Vector2(60, 105)
-	# Use the engine's fallback font for these Unicode symbols. Laila-Bold does
-	# not contain them, and browser exports do not provide macOS font fallback.
-	result_mark.text = "✔" if attempt.get("successful", false) else "✖"
-	result_mark.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	result_mark.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	result_mark.add_theme_font_size_override("font_size", 68)
-	result_mark.add_theme_color_override(
-		"font_color",
-		Color(0.20, 0.62, 0.28) if attempt.get("successful", false) else Color(0.78, 0.20, 0.20)
-	)
-	result_mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	ingredients.add_child(result_mark)
 	return row
 
 func _on_dimmer_input(event: InputEvent) -> void:
