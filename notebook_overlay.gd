@@ -177,10 +177,11 @@ func _create_history_row(attempt: Dictionary) -> PanelContainer:
 
 	var result_mark := Label.new()
 	result_mark.custom_minimum_size = Vector2(60, 105)
-	result_mark.text = "✓" if attempt.get("successful", false) else "✕"
+	# Use the engine's fallback font for these Unicode symbols. Laila-Bold does
+	# not contain them, and browser exports do not provide macOS font fallback.
+	result_mark.text = "✔" if attempt.get("successful", false) else "✖"
 	result_mark.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	result_mark.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	result_mark.add_theme_font_override("font", FONT)
 	result_mark.add_theme_font_size_override("font_size", 68)
 	result_mark.add_theme_color_override(
 		"font_color",
